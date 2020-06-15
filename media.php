@@ -29,18 +29,10 @@
                 <!-- Navbar -->
                 <nav class="navbar-custom">
                     <ul class="list-unstyled topbar-nav float-right mb-0">
-
-                        <!-- <li class="dropdown notification-list"><a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><i class="ti-bell noti-icon"></i> <span class="badge badge-danger badge-pill noti-icon-badge">2</span></a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-lg pt-0">
-                                <h6 class="dropdown-item-text font-15 m-0 py-3 bg-primary text-white d-flex justify-content-between align-items-center">Notifications <span class="badge badge-light badge-pill">2</span></h6>
-                                <div class="slimscroll notification-list">
-                                    <a href="#" class="dropdown-item py-3"><small class="float-right text-muted pl-2"></small><div class="media"><div class="avatar-md bg-primary"><i class="la la-cart-arrow-down text-white"></i></div><div class="media-body align-self-center ml-2 text-truncate"><h6 class="my-0 font-weight-normal text-dark">Your order is placed</h6><small class="text-muted mb-0">Dummy text of the printing and industry.</small></div><!--end media-body--></div><!--end media--> </a>
-
-                                <!-- </div> -->
-                                <!-- All<a href="javascript:void(0);" class="dropdown-item text-center text-primary">View all <i class="fi-arrow-right"></i></a></div>
-                        </li> -->
+                       
+                       
                         <li class="dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><span class="ml-1 nav-user-name hidden-sm">Halo, Selamat Datang <?php echo $nama; ?><i class="mdi mdi-chevron-down"></i></span></a
+                            <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"> <span class="ml-1 nav-user-name hidden-sm">Halo, Selamat Datang<?php echo $nama ?> <i class="mdi mdi-chevron-down"></i></span></a>
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i class="ti-user text-muted mr-2"></i> Profile</a>
                                 <div class="dropdown-divider mb-0"></div><a class="dropdown-item" href="logout.php"><i class="ti-power-off text-muted mr-2"></i> Logout</a></div>
                         </li>
@@ -66,32 +58,32 @@
                      echo 'class="mm-active"';
                     } ?> >
                       <a href="media.php?module=home"><i class="ti-bar-chart"></i><span>Dashboard</span></a>
-
+                        
                     </li>
 
                     <li <?php if ($_GET[module]=="histori") {
                      echo 'class="mm-active"';
                     } ?> >
                       <a href="media.php?module=histori"><i class="ti-share"></i><span>Histori Presensi</span></a>
-
+                        
                     </li>
 
                     <li <?php if ($_GET[module]=="karyawan") {
                      echo 'class="mm-active"';
                     } ?> >
                       <a href="media.php?module=karyawan"><i class="ti-user"></i><span>Karyawan</span></a>
-
+                        
                     </li>
                     <li <?php if ($_GET[module]=="laporanpresensi") {
                      echo 'class="mm-active"';
                     } ?>><a href="javascript: void(0);"><i class="ti-printer"></i><span>Laporan</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-
+                           
                             <li class="nav-item"><a class="nav-link" href="media.php?module=laporanpresensi"><i class="ti-printer"></i>Laporan Presensi</a></li>
-
+                            
                         </ul>
                     </li>
-
+                    
                     <li <?php if ($_GET[module]=="mstadmin"||$_GET[module]=="slider"||$_GET[module]=="notif") {
                      echo 'class="mm-active"';
                     } ?>><a href="javascript: void(0);"><i class="ti-layers-alt"></i><span>Master Data</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -99,10 +91,10 @@
                             <li class="nav-item"><a class="nav-link" href="media.php?module=mstadmin"><i class="ti-control-record"></i>Data Admin</a></li>
                             <li class="nav-item"><a class="nav-link" href="media.php?module=slider"><i class="ti-control-record"></i>Slider</a></li>
                             <li class="nav-item"><a class="nav-link" href="media.php?module=notif"><i class="ti-control-record"></i>Notifikasi</a></li>
-
+                           
                         </ul>
                     </li>
-
+                   
                 </ul>
             </div>
             <!-- end left-sidenav-->
@@ -126,8 +118,8 @@
                             <!--end col-->
                         </div>
                         <!-- end page title end breadcrumb -->
-
-                   <?php include "content.php" ?>
+                        
+                   <?php include "content.php" ?>  
 
                  </div>
 

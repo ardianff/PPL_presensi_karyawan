@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>sistem presensi karyawan menggunakan metode geofencing </title>
+    <title>sistem presensi karyawan menggunakan metode geofencing</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="" name="author">
@@ -14,7 +14,7 @@
     <!-- jvectormap -->
     <link href="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
     <!-- App css -->
-
+   
 
 
      <link href="assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
