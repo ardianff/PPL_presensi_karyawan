@@ -6,10 +6,10 @@ $username=$_POST['Signin'];
 $password=$_POST['Password'];
 
 
-if(!empty($username&&$password)){
-	$select = mysql_query("SELECT * from karyawan  WHERE username='$username' and `password`=md5('$password')  limit 1");
+if(!empty($username)&& !empty($password)){
+	$select = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from karyawan  WHERE username='$username' and `password`=md5('$password')  limit 1");
 	// and id_level='3'  and Verifikasi='Y'
-	$sql = mysql_fetch_array($select);
+	$sql = mysqli_fetch_array($select);
 	if(empty($sql)){
 		$response["success"] = 0;
 		$response["message"] = "User Atau Password Mungkin Salah!";
@@ -17,7 +17,7 @@ if(!empty($username&&$password)){
   
 	}else{
 
-		    mysql_query("INSERT into lastlogin (id_user,TanggalBuat) values ('$sql[id]',NOW())");
+		    mysqli_query($GLOBALS["___mysqli_ston"], "INSERT into lastlogin (id_user,TanggalBuat) values ('$sql[id]',NOW())");
 		
 		$response['level']        = $sql['id_level'];
 		$response['id'] 		  = $sql['id'];

@@ -16,11 +16,11 @@
 
     
 
-      $cekusername=mysql_num_rows(mysql_query("SELECT * from karyawan where username='$_POST[username]'"));
+      $cekusername=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from karyawan where username='$_POST[username]'"));
 
       if ($cekusername<1) {
          $password=md5($_POST[password]);
-      mysql_query("INSERT INTO karyawan ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`,`Ktp`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]',NOW(),'$_POST[ktp]')");
+      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO karyawan ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`,`Ktp`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]',NOW(),'$_POST[ktp]')");
 
 
  echo "<script>window.alert('Penambahan User Berhasil !!!')
@@ -34,7 +34,7 @@
 
     
     }elseif ($_GET[delete]=="y") {
-      mysql_query("DELETE FROM `karyawan` WHERE id='$_GET[id]'");
+      mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM `karyawan` WHERE id='$_GET[id]'");
 
       header('location:media.php?module=karyawan');
     }elseif (isset($_POST[simpanedit])) {
@@ -43,7 +43,7 @@
 
 
 
-     mysql_query("UPDATE `karyawan` SET `nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]',`Ktp`='$_POST[ktp]' WHERE username='$_POST[username]'");
+     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `karyawan` SET `nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]',`Ktp`='$_POST[ktp]' WHERE username='$_POST[username]'");
 echo '<script type="text/javascript">
            window.location = "media.php?module=karyawan"
       </script>';
@@ -87,10 +87,10 @@ echo '<script type="text/javascript">
                           <tbody>
 
                             <?php
-                            $query=mysql_query("select a.*,b.Level as NamaLevel,b.id as idlevel from karyawan a
+                            $query=mysqli_query($GLOBALS["___mysqli_ston"], "select a.*,b.Level as NamaLevel,b.id as idlevel from karyawan a
 left join user_level b on a.id_level=b.id where a.id_level='2'");
                             $no;
-                            while ($q=mysql_fetch_array($query)) {
+                            while ($q=mysqli_fetch_array($query)) {
                               $no++;
                              
 
@@ -180,10 +180,10 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                                                 <?php
                                                  
                      
-                    $sql = mysql_query("SELECT * from user_level where id='2'");
+                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user_level where id='2'");
                       echo "<select class=\"form-control\" name=\"level\" >";
                       echo "<option > Pilih Level  </option>";
-                    while ($r = mysql_fetch_array($sql)) {
+                    while ($r = mysqli_fetch_array($sql)) {
                           
                         if ($tampil[Nama]==$r[level]) {
                         echo "<option value='$r[id]' selected>  $r[level] </option>";
@@ -218,7 +218,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
       
 
       case 'edit':
-      $edit=mysql_fetch_assoc(mysql_query("select a.*,b.Level as NamaLevel,b.id as idlevel from user a
+      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "select a.*,b.Level as NamaLevel,b.id as idlevel from user a
 left join user_level b on a.id_level=b.id  WHERE a.id='$_GET[id]'"));
 
      
@@ -268,10 +268,10 @@ left join user_level b on a.id_level=b.id  WHERE a.id='$_GET[id]'"));
                                                 <?php
                                                  
                      
-                    $sql = mysql_query("SELECT * from user_level where id='2'");
+                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user_level where id='2'");
                       echo "<select class=\"form-control \" name=\"level\" readonly>";
                       echo "<option > Pilih Level  </option>";
-                    while ($r = mysql_fetch_array($sql)) {
+                    while ($r = mysqli_fetch_array($sql)) {
                           
                         if ($edit[id_level]==$r[id]) {
                         echo "<option value='$r[id]' selected>  $r[level] </option>";

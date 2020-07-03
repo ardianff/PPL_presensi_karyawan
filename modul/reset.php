@@ -16,11 +16,11 @@
 
     
 
-      $cekusername=mysql_num_rows(mysql_query("SELECT * from user where username='$_POST[username]'"));
+      $cekusername=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user where username='$_POST[username]'"));
 
       if ($cekusername<1) {
          $password=md5($_POST[password]);
-      mysql_query("INSERT INTO user ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]',NOW())");
+      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO user ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]',NOW())");
 
 
  echo "<script>window.alert('Penambahan User Berhasil !!!')
@@ -34,7 +34,7 @@
 
     
     }elseif ($_GET[delete]=="y") {
-      mysql_query("DELETE FROM `user` WHERE id='$_GET[id]'");
+      mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM `user` WHERE id='$_GET[id]'");
 
       header('location:media.php?module=mstadmin');
     }elseif (isset($_POST[simpanedit])) {
@@ -43,7 +43,7 @@
 
         $password=md5($_POST[passwordbaru]);
 
-     mysql_query("UPDATE `user` SET `password`='$password' WHERE username='$_GET[username]'");
+     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `user` SET `password`='$password' WHERE username='$_GET[username]'");
 
  echo "<script>window.alert('Password Berhasil Dirubah !!!')
                                                 window.location='media.php?module=reset&username=$_GET[username]'</script>";
@@ -65,7 +65,7 @@
                                            <hr/>
 
                                            <?php
-  $edit=mysql_fetch_assoc(mysql_query("SELECT * from v_user WHERE username='$_GET[username]'"));
+  $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from v_user WHERE username='$_GET[username]'"));
 
   
         ?>
@@ -104,7 +104,7 @@
       
 
       case 'edit':
-      $edit=mysql_fetch_assoc(mysql_query("SELECT * from v_user WHERE id='$_GET[id]'"));
+      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from v_user WHERE id='$_GET[id]'"));
 
      
 
@@ -151,10 +151,10 @@
                                                 <?php
                                                  
                      
-                    $sql = mysql_query("SELECT * from user_level where id='1'");
+                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user_level where id='1'");
                       echo "<select class=\"form-control \" name=\"level\" readonly>";
                       echo "<option > Pilih Level  </option>";
-                    while ($r = mysql_fetch_array($sql)) {
+                    while ($r = mysqli_fetch_array($sql)) {
                           
                         if ($edit[id_level]==$r[id]) {
                         echo "<option value='$r[id]' selected>  $r[level] </option>";

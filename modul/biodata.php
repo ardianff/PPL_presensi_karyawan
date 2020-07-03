@@ -12,11 +12,11 @@
  //simpan
     if (isset($_POST['submit'])) {
 
-      $cekusername=mysql_num_rows(mysql_query("SELECT * from user where username='$_POST[username]'"));
+      $cekusername=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user where username='$_POST[username]'"));
 
       if ($cekusername<1) {
          $password=md5($_POST[password]);
-      mysql_query("INSERT INTO user ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`,`Verifikasi`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]',NOW(),'Y')");
+      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO user ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`,`Verifikasi`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]',NOW(),'Y')");
 
 
  echo "<script>window.alert('Penambahan User Berhasil !!!')
@@ -30,7 +30,7 @@
 
     
     }elseif ($_GET[delete]=="y") {
-      mysql_query("DELETE FROM `user` WHERE id='$_GET[id]'");
+      mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM `user` WHERE id='$_GET[id]'");
 
       header('location:media.php?module=biodata');
     }elseif (isset($_POST[simpanedit])) {
@@ -39,7 +39,7 @@
       if (empty($_FILES["fileToUpload"]["name"])) {
         
 
-     mysql_query("UPDATE `user` SET `nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]' WHERE username='$_POST[username]'");
+     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `user` SET `nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]' WHERE username='$_POST[username]'");
 
 
         echo "<script>window.alert('File berhasil diupdate !!!')
@@ -108,7 +108,7 @@
                       $brkas=$_FILES['fileToUpload']['name'];
 
                       
-     mysql_query("UPDATE `user` SET `Foto`='$brkas',`nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]' WHERE username='$_POST[username]'");
+     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `user` SET `Foto`='$brkas',`nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]' WHERE username='$_POST[username]'");
 
 
 
@@ -144,13 +144,13 @@
 
 
     if ($_GET[verifikasi]=="y") {
-      mysql_query("UPDATE user set Verifikasi='Y' where id='$_GET[id]'");
+      mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE user set Verifikasi='Y' where id='$_GET[id]'");
     }else{
- mysql_query("UPDATE user set Verifikasi='N' where id='$_GET[id]'");
+ mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE user set Verifikasi='N' where id='$_GET[id]'");
     }
 
 
-    $edit=mysql_fetch_assoc(mysql_query("SELECT * from user WHERE username='$_GET[username]'"));
+    $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user WHERE username='$_GET[username]'"));
 
     switch($_GET[act]){
        default:
@@ -194,12 +194,12 @@
                                                 <?php
                                                  
                      
-                    $sql = mysql_query("SELECT * from user_level ");
+                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user_level ");
                       echo "<select class=\"form-control\" name=\"level\">";
                       echo "<option > Pilih Level  </option>";
 
 
-                    while ($r = mysql_fetch_array($sql)) {
+                    while ($r = mysqli_fetch_array($sql)) {
 
                           echo "$edit[id_level]";
                           echo "sdfds";

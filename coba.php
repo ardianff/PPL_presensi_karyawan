@@ -5,26 +5,49 @@
    $nama = $_SESSION['username'];
    $user_level = $_SESSION['level'];
   if(!isset($_SESSION['username'])){
-  
-    header('location:login.php');
+
+    header('location:index.php');
   }
 
  //simpan
-    if (isset($_POST['submit'])){
-      
-        mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO `notifikasi`( `judul`, `isi`, `tanggal`, `iduser`, `NA`) VALUES ('$_POST[judul]','$_POST[isi]',NOW(),'$_POST[iduser]','N')");
-        
-           echo "<script>window.alert('Notif berhasil dikirim!!')
-                                                window.location='media.php?module=notif'</script>";
-        
+    if (isset($_POST['submit'])) {
+
+
+
+
+
+      $cekusername=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user where username='$_POST[username]'"));
+
+      if ($cekusername<1) {
+         $password=md5($_POST[password]);
+      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO user ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]',NOW())");
+
+
+ echo "<script>window.alert('Penambahan User Berhasil !!!')
+                                                window.location='media.php?module=mstadmin'</script>";
+      }else{
+
+ echo "<script>window.alert('Gagal,username sudah ada!!')
+                                                window.location='media.php?module=mstadmin'</script>";
+
+      }
+
+
     }elseif ($_GET[delete]=="y") {
-      mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM `notifikasi` WHERE id='$_GET[id]'");
+      mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM `user` WHERE id='$_GET[id]'");
 
-      header('location:media.php?module=<?php echo $_GET[module]?>');
+      header('location:media.php?module=mstadmin');
     }elseif (isset($_POST[simpanedit])) {
-     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `user` SET`nama`='$_POST[nama]',`alamat`='$_POST[alamat]',`phone`='$_POST[phone]',`id_level`='$_POST[level]' WHERE id='$_GET[id]'");
 
-      header('location:media.php?module=<?php echo $_GET[module]?>');
+
+
+
+
+     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `user` SET `nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]' WHERE username='$_POST[username]'");
+echo '<script type="text/javascript">
+           window.location = "media.php?module=mstadmin"
+      </script>';
+
     }
 
 
@@ -37,56 +60,59 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-box card shadow">
-                                        
+
                                         <div class="card-body">
 
-                                          <h2 class="mb-0">Master notif</h2>
+                                          <h2 class="mb-0">Master Admin</h2>
                                            <hr/>
 
                                            <button type="button" class="btn btn-sm btn-primary mt-1 mb-1" data-toggle="modal" data-target="#largeModal">Tambah Data</button><br/><br/>
 
 
                                            <div class="table-responsive">
-                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                          <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                           <thead>
                             <tr>
                               <th class="wd-15p">No</th>
-                              <th class="wd-15p">Judul</th>
-                              <th class="wd-15p">Isi</th>
-                              <th class="wd-20p">User</th>
-                              <th class="wd-15p">Tanggal</th>
-                             
+                              <!-- <th class="wd-15p">ID</th> -->
+                              <th class="wd-15p">Username</th>
+                              <th class="wd-20p">Nama</th>
+                              <th class="wd-20p">No.phone</th>
+                              <th class="wd-20p">Alamat</th>
+                              <th class="wd-15p">Level</th>
+
                          <th class="wd-10p">Aksi</th>
                             </tr>
                           </thead>
                           <tbody>
 
                             <?php
-                            $query=mysqli_query($GLOBALS["___mysqli_ston"], "select a.*,b.nama from notifikasi a
-                              left join karyawan b on a.iduser=b.id");
+                            $query=mysqli_query($GLOBALS["___mysqli_ston"], "select a.*,b.Level as NamaLevel,b.id as idlevel from user a
+left join user_level b on a.id_level=b.id where a.id_level='1'");
                             $no;
                             while ($q=mysqli_fetch_array($query)) {
                               $no++;
-                             
+
 
                              echo "
                               <tr>
                               <td>$no</td>
-                                <td>$q[judul]  </td>
-                                <td>$q[isi]</td>
+
+                                <td>$q[username]</td>
                                 <td>$q[nama] </td>
-                                <td>$q[tanggal] </td>
-                               
+                                <td>$q[phone] </td>
+                                <td>$q[alamat] </td>
+                                <td>$q[NamaLevel] </td>
 
                                 <td>
-                               
-                                <a href=\"media.php?module=notif&delete=y&id=$q[id]\" ><span class=\"badge badge-danger\">Hapus</span></a>
+                                <a href=\"media.php?module=mstadmin&act=edit&id=$q[id]\" ><span class=\"badge badge-warning\">Edit</span></a>
+                                <a href=\"media.php?module=mstadmin&delete=y&id=$q[id]\" ><span class=\"badge badge-danger\">Hapus</span></a>
                                  </td>
                               </tr>";
 
 
 
-                              
+
                             }
 
 
@@ -99,7 +125,7 @@
                               <td>$654,765</td>
                               <td>b.Chloe@datatables.net</td>
                             </tr> -->
-                          
+
                           </tbody>
                         </table>
                 </div>
@@ -109,7 +135,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h2 class="modal-title" id="largeModalLabel">Tambah Notif</h2>
+                      <h2 class="modal-title" id="largeModalLabel">Tambah User</h2>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -120,48 +146,62 @@
 
 
                           <div class="form-group">
-                            <label class="form-label">Judul</label>
-                            <input type="text" class="form-control"  placeholder="Judul" name="judul">
+                            <label class="form-label">Nama</label>
+                            <input type="text" class="form-control"  placeholder="Nama" name="nama">
                           </div>
-                          
-                             <div class="form-group mb-0">
-                            <label class="form-label">ISI</label>
-                            <textarea class="form-control" name="isi" rows="4" placeholder="Isi.."></textarea>
-                          </div>
-                   
-
-
                            <div class="form-group">
-                              <label for="cc-number" class="control-label mb-1">User</label>
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control"  placeholder="Username" name="username" >
+                          </div>
+                           <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="text" class="form-control"  placeholder="Password" name="password">
+                          </div>
+
+                          <div class="form-group">
+                            <label class="form-label">Alamat</label>
+                            <input type="text" class="form-control"  placeholder="Alamat" name="alamat" >
+                          </div>
+
+                          <div class="form-group">
+                            <label class="form-label">Phone</label>
+                            <input type="text" class="form-control"  placeholder="Phone" name="phone" >
+                          </div>
+
+
+
+                                             <div class="form-group">
+                                                <label for="cc-number" class="control-label mb-1">Level</label>
                                                 <?php
-                                                 
-                     
-                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from member where id_level='2' ");
-                      echo "<select class=\"form-control\" name=\"iduser\" >";
-                      echo "<option > Pilih User  </option>";
+
+
+                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user_level where id='1'");
+                      echo "<select class=\"form-control\" name=\"level\" >";
+                      echo "<option > Pilih Level  </option>";
                     while ($r = mysqli_fetch_array($sql)) {
-                          
+
                         if ($tampil[Nama]==$r[level]) {
-                        echo "<option value='$r[id]' selected>  $r[nama] </option>";
+                        echo "<option value='$r[id]' selected>  $r[level] </option>";
                              }else{
-                        echo "<option value='$r[id]'>  $r[nama] </option>";
-                              } 
+                        echo "<option value='$r[id]'>  $r[level] </option>";
+                              }
                           }
-                  
-                         
+
+
                     echo '</select>';
-    
+
                     ?>
-                                               
+
                                             </div>
-                   
+
+
 
 
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                       <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
-                     
+
                     </div>
                   </div>
                 </div>
@@ -170,22 +210,22 @@
 
        <?php
         break;
-      
+
 
       case 'edit':
-      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT a.*,b.level,b.id as idlevel FROM `member` a
-                            join user_level b on a.id_level=b.id WHERE a.id='$_GET[id]'"));
+      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "select a.*,b.Level as NamaLevel,b.id as idlevel from user a
+left join user_level b on a.id_level=b.id  WHERE a.id='$_GET[id]'"));
 
-     
+
 
         ?>
 
-        
+
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-box card shadow">
-                                        
+
                                         <div class="card-body">
 
                                           <h2 class="mb-0">Edit</h2>
@@ -199,44 +239,43 @@
                             <label class="form-label">Username</label>
                             <input type="text" class="form-control" readonly  placeholder="Username" name="username" value="<?php echo $edit[username]; ?> ">
                           </div>
-                           <div class="form-group">
-                            <label class="form-label">Password</label>
-                            <input type="text" class="form-control" readonly  placeholder="Password" name="password" value="<?php echo $edit[password]; ?>">
+                          <div class="form-group">
+                            <label class="form-label">Alamat</label>
+                            <input type="text" class="form-control"  placeholder="Alamat" name="alamat" value="<?php echo $edit[alamat]; ?>">
                           </div>
-                           <div class="form-group">
-                            <label class="form-label">No Phone</label>
+
+                          <div class="form-group">
+                            <label class="form-label">Phone</label>
                             <input type="text" class="form-control"  placeholder="Phone" name="phone" value="<?php echo $edit[phone]; ?>">
                           </div>
+
+
 
 
                                              <div class="form-group">
                                                 <label for="cc-number" class="control-label mb-1">Level</label>
                                                 <?php
-                                                 
-                     
-                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user_level where id='3' ");
-                      echo "<select class=\"form-control select2 w-100\" name=\"level\" >";
+
+
+                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user_level where id='1'");
+                      echo "<select class=\"form-control \" name=\"level\" readonly>";
                       echo "<option > Pilih Level  </option>";
                     while ($r = mysqli_fetch_array($sql)) {
-                          
-                        if ($edit[idlevel]==$r[id]) {
+
+                        if ($edit[id_level]==$r[id]) {
                         echo "<option value='$r[id]' selected>  $r[level] </option>";
                              }else{
                         echo "<option value='$r[id]'>  $r[level] </option>";
-                              } 
+                              }
                           }
-                  
-                         
+
+
                     echo '</select>';
-    
+
                     ?>
-                                               
+
                                             </div>
-                      <div class="form-group mb-0">
-                            <label class="form-label">Alamat</label>
-                            <textarea class="form-control" name="alamat" rows="4" placeholder="Alamat.."><?php echo $edit[alamat];?></textarea>
-                          </div>
-                   
+
 
 
                     <button type="submit" name="simpanedit" class="mt-2 btn btn-block btn-success mt-1 mb-1">Simpan</button>
@@ -244,7 +283,7 @@
 
         <?php
         break;
-    
+
     }
 
 ?>

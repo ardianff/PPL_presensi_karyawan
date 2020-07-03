@@ -9,26 +9,26 @@ $cari=$_GET['cari'];
 
    if (empty($cari)||$cari=="") {
      
-$result = mysql_query("SELECT * from datapresensi where id_user='$username' and Tipe='Masuk'  order by TanggalPresensi DESC");
+$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from datapresensi where id_user='$username' and Tipe='Masuk'  order by TanggalPresensi DESC");
 
 
    }else{
 
-$result = mysql_query("SELECT * from datapresensi where id_user='$username' and TanggalPresensi like '%$cari%' and Tipe='Masuk'  order by TanggalPresensi DESC");
+$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from datapresensi where id_user='$username' and TanggalPresensi like '%$cari%' and Tipe='Masuk'  order by TanggalPresensi DESC");
 
    }
    
 
    
 
-$cekquery=mysql_num_rows($result);
+$cekquery=mysqli_num_rows($result);
 
 if ($cekquery<1) {
        $response["success"] = 0;
             $response["message"] = "kosong";
             die(json_encode($response));
     }else{
-      while($sql = mysql_fetch_array($result)){
+      while($sql = mysqli_fetch_array($result)){
       
 
         $tmp = array();

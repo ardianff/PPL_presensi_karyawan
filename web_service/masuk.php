@@ -54,7 +54,7 @@ $foto = $_POST['foto'];
 
 if(!empty($username&&$emai)){
 		$tgl=date('Y-m-d');
-		$cekemai=mysql_num_rows(mysql_query("SELECT * from datapresensi where   TanggalPresensi='$tgl'  and `emai`='$emai'"));
+		$cekemai=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from datapresensi where   TanggalPresensi='$tgl'  and `emai`='$emai'"));
 		
 		if ($cekemai==2) {
 		$response["success"] = 3;
@@ -62,7 +62,7 @@ if(!empty($username&&$emai)){
 		die(json_encode($response));
 		}else{
 
-		$cekmasuk=mysql_num_rows(mysql_query("SELECT * from datapresensi where id_user='$username' and TanggalPresensi='$tgl' and Tipe='Masuk'"));
+		$cekmasuk=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from datapresensi where id_user='$username' and TanggalPresensi='$tgl' and Tipe='Masuk'"));
 		
 		if ($cekmasuk==1) {
 		$response["success"] = 4;
@@ -70,7 +70,7 @@ if(!empty($username&&$emai)){
 		die(json_encode($response));
 		}else{
 
-		mysql_query("INSERT INTO `datapresensi`( `id_user`, `Hari`, `TanggalPresensi`, `PresensiMasuk`, `TanggalBuat`, `Emai`, `Tipe`,`Foto`) VALUES ('$username','$hari','$tgl','$jam',NOW(),'$emai','Masuk','$namafoto')");
+		mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO `datapresensi`( `id_user`, `Hari`, `TanggalPresensi`, `PresensiMasuk`, `TanggalBuat`, `Emai`, `Tipe`,`Foto`) VALUES ('$username','$hari','$tgl','$jam',NOW(),'$emai','Masuk','$namafoto')");
 
 		$path = "foto/".$namafoto;
 		file_put_contents($path,base64_decode($foto));

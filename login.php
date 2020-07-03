@@ -3,21 +3,7 @@
   include "atas.php";
  include "./config/koneksi.php";
  date_default_timezone_set("Asia/Jakarta");
-
-
-       
-                        
 ?>
-
-
-
-
-
-             
-                                
-                 
-                              
-                              
 <body class="account-body accountbg">
     <!-- Log In page -->
     <div class="container">
@@ -30,40 +16,41 @@
                                 <div class="auth-logo-box">
                                     <a href="dashboard/analytics-index.html" class="logo logo-admin"><img src="assets/images/logo-sm.png" height="55" alt="logo" class="auth-logo"></a>
                                 </div>
-                                
+
                                 <!--end auth-logo-box-->
                                 <div class="text-center auth-logo-text">
                                     <h4 class="mt-0 mb-3 mt-5">E-PRESENSI</h4>
-                                    <p class="text-muted mb-0">Sign in to continue to sistem presensi karyawan menggunakan metode geofencing</p>
+                                    <p class="text-muted mb-0">Sign in to continue to sistem presensi karyawan menggunakan metode geofencing & face capture</p>
                                 </div>   <?php
-                    
+
                 if(isset($_POST['username']) && isset($_POST['password'])){
                       $username = $_POST['username'];
                       $password = md5($_POST['password']);
-                      
-                         $select = mysql_query("SELECT * from user WHERE username='$username' and `password`='$password'limit 1");
-                         $sql = mysql_fetch_array($select);
-                         
+
+                         $select = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user WHERE username='$username' and `password`='$password'limit 1");
+                         $sql = mysqli_fetch_array($select);
+
+
                         // tutup sukses
-              
+
                       if(empty($sql)){
-                        
+
                         echo "<div class=\"alert alert-danger\"><center>
                             <strong>Maaf!</strong> Username && password anda salah. tolong ulangi!</center>
                           </div>";
                        // jika sukses
-   
+
                             }else{
 
-                            mysql_query("INSERT into lastlogin (id_user,TanggalBuat) values ('$sql[id]',NOW())");
+                            mysqli_query($GLOBALS["___mysqli_ston"], "INSERT into lastlogin (id_user,TanggalBuat) values ('$sql[id]',NOW())");
 
-                             $_SESSION['username'] = $sql['username'];
+                            $_SESSION['username'] = $sql['username'];
+                            $_SESSION['nama'] = $nama;
                             $_SESSION['password'] = $sql['password'];
                             $_SESSION['id'] = $sql['id'];
                             $_SESSION['level']=$sql['id_level'];
-
                             $_SESSION['StatusLogin'] = '1';
-                            
+
                             echo " <script>window.location.href='media.php?module=home'</script> ";
                           }
                       }

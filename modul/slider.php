@@ -64,7 +64,7 @@
 
                       $brkas=$_FILES['fileToUpload']['name'];
 
-                      mysql_query("INSERT INTO `slider`(`Nama`, `Slider`,`TanggalBuat`) VALUES ('$_POST[nama]','$brkas',NOW())");
+                      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO `slider`(`Nama`, `Slider`,`TanggalBuat`) VALUES ('$_POST[nama]','$brkas',NOW())");
                       
                   } else {
                      echo "<script>window.alert('Sorry, there was an error uploading your file. !!!')
@@ -75,14 +75,14 @@
         
 
       }elseif ($_GET[delete]=="y") {
-      mysql_query("DELETE FROM `slider` WHERE id_slider='$_GET[id]'");
+      mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM `slider` WHERE id_slider='$_GET[id]'");
 
      echo "<script>window.alert('Data Berhasil dihapus. !!!')
                       window.location='media.php?module=slider'</script>";
     }elseif (isset($_POST[simpanedit])) {
 
       if (empty($_FILES["fileToUpload"]["name"])) {
-         mysql_query("UPDATE `slider` SET `Nama`='$_POST[nama]' WHERE id_slider='$_GET[id]'");
+         mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `slider` SET `Nama`='$_POST[nama]' WHERE id_slider='$_GET[id]'");
  echo "<script>window.alert('Data BErhasil Diupdate. !!!')
                       window.location='media.php?module=slider'</script>";
       }
@@ -140,7 +140,7 @@
 
                       $brkas=$_FILES['fileToUpload']['name'];
 
-                       mysql_query("UPDATE `slider` SET `Nama`='$_POST[nama]',`Slider`='$brkas' WHERE id_slider='$_GET[id]'");
+                       mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `slider` SET `Nama`='$_POST[nama]',`Slider`='$brkas' WHERE id_slider='$_GET[id]'");
                   } else {
                      echo "<script>window.alert('Sorry, there was an error uploading your file. !!!')
                       window.location='media.php?module=slider'</script>";
@@ -191,10 +191,10 @@
 
                             <?php
                            if ($_SESSION[level]=="1") {
-                              $query=mysql_query("SELECT * from slider  order by id_slider desc");
+                              $query=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from slider  order by id_slider desc");
                             }
                             $no;
-                            while ($q=mysql_fetch_array($query)) {
+                            while ($q=mysqli_fetch_array($query)) {
                               $no++;
                              
 
@@ -304,7 +304,7 @@
 
 
          case 'edit':
-      $edit=mysql_fetch_assoc(mysql_query("SELECT * from slider WHERE id_slider='$_GET[id]'"));
+      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from slider WHERE id_slider='$_GET[id]'"));
 
      
 

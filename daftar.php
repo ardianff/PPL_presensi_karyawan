@@ -10,7 +10,7 @@ include "atas.php";
                       $username = $_POST['username'];
                       $password = md5($_POST['password']);
                       
-                         mysql_query("INSERT INTO `user`( `nama`, `alamat`, `phone`, `username`, `password`, `id_level`,  `TanggalBuat`) VALUES ('$_POST[nama]','$_POST[alamat]','$_POST[phone]','$_POST[username]','$password','2',NOW())");
+                         mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO `user`( `nama`, `alamat`, `phone`, `username`, `password`, `id_level`,  `TanggalBuat`) VALUES ('$_POST[nama]','$_POST[alamat]','$_POST[phone]','$_POST[username]','$password','2',NOW())");
                         
     echo "<script>window.alert('Pendaftaran Berhasil!!!')
 window.location='login.php'</script>";

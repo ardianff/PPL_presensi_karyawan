@@ -9,19 +9,19 @@ $username=$_GET['username'];
 
 
 
-$result = mysql_query("select * from karyawan where username='$username'");
+$result = mysqli_query($GLOBALS["___mysqli_ston"], "select * from karyawan where username='$username'");
 
 
 
 
-  $cekquery=mysql_num_rows($result);
+  $cekquery=mysqli_num_rows($result);
 
   if ($cekquery<1) {
       $response["success"] = 0;
       $response["message"] = "kosong";
       die(json_encode($response));
   } else {
-      while ($sql = mysql_fetch_array($result)) {
+      while ($sql = mysqli_fetch_array($result)) {
           $tmp = array();
 
 

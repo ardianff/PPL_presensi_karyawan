@@ -52,7 +52,7 @@ if(!empty($username&&$emai)){
 
 		$tgl=date('Y-m-d');
 		
-		mysql_query("INSERT INTO `datapresensi`( `id_user`, `id_jadwal`, `TanggalPresensi`, `PresensiMasuk`, `TanggalBuat`, `Email`, `Tipe`) VALUES ('$username','$hari','$tgl','$jam',NOW(),'$emai','Keluar')")
+		mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO `datapresensi`( `id_user`, `id_jadwal`, `TanggalPresensi`, `PresensiMasuk`, `TanggalBuat`, `Email`, `Tipe`) VALUES ('$username','$hari','$tgl','$jam',NOW(),'$emai','Keluar')")
 	
 		
 		$response["success"]      = 1;

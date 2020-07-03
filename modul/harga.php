@@ -14,7 +14,7 @@
     if (isset($_POST['submit'])) {
 
     
-      mysql_query("INSERT into harga (Harga) values ('$_POST[Harga]')");
+      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT into harga (Harga) values ('$_POST[Harga]')");
 
    
  echo "<script>window.alert('Penambahan Harga Berhasil !!!')
@@ -23,7 +23,7 @@
 
     
     }elseif ($_GET[delete]=="y") {
-      mysql_query("DELETE FROM `harga` WHERE id_harga='$_GET[id]'");
+      mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM `harga` WHERE id_harga='$_GET[id]'");
 
       
  echo "<script>window.alert('Harga Berhasil dihapus !!!')
@@ -35,7 +35,7 @@
 
 
 
-     mysql_query("UPDATE `harga` SET `Harga`='$_POST[Harga]' WHERE id_harga='$_GET[id]'");
+     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `harga` SET `Harga`='$_POST[Harga]' WHERE id_harga='$_GET[id]'");
 
  echo "<script>window.alert(' Harga Berhasil Diupdate!!!')
                                                 window.location='media.php?module=harga'</script>";
@@ -77,9 +77,9 @@
                           <tbody>
 
                             <?php
-                            $query=mysql_query("SELECT * from harga");
+                            $query=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from harga");
                             $no;
-                            while ($q=mysql_fetch_array($query)) {
+                            while ($q=mysqli_fetch_array($query)) {
                               $no++;
                              
 
@@ -154,7 +154,7 @@
       
 
       case 'edit':
-      $edit=mysql_fetch_assoc(mysql_query("select a.*,b.Level as NamaLevel,b.id as idlevel from user a
+      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "select a.*,b.Level as NamaLevel,b.id as idlevel from user a
 left join user_level b on a.id_level=b.id  WHERE a.id='$_GET[id]'"));
 
      

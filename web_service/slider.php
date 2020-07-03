@@ -2,9 +2,9 @@
 		error_reporting(0);
 		include "koneksi.php";
 	 $response = array();
-         $result = mysql_query("Select * from slider  order by id_slider desc");
+         $result = mysqli_query($GLOBALS["___mysqli_ston"], "Select * from slider  order by id_slider desc");
 
-         $cekdata=mysql_num_rows($result);
+         $cekdata=mysqli_num_rows($result);
         
         if ($cekdata <1) {
              
@@ -13,7 +13,7 @@
             die(json_encode($response));
         }
         else{ 
-            while($row = mysql_fetch_array($result)){
+            while($row = mysqli_fetch_array($result)){
         	
 
         		$tmp = array();

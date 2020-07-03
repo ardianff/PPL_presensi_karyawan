@@ -56,7 +56,7 @@ if(!empty($username&&$emai)){
 
 		$tgl=date('Y-m-d');
 
-		$cekmasuk=mysql_num_rows(mysql_query("SELECT * from datapresensi where TanggalPresensi='$tgl' and id_user='$username' and Tipe='Masuk'"));
+		$cekmasuk=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from datapresensi where TanggalPresensi='$tgl' and id_user='$username' and Tipe='Masuk'"));
 
 		if ($cekmasuk==0) {
 		$response["success"] = 5;
@@ -64,7 +64,7 @@ if(!empty($username&&$emai)){
 		die(json_encode($response));
 		}else{
 
-		$cekemai=mysql_num_rows(mysql_query("SELECT * from datapresensi where  TanggalPresensi='$tgl' and `emai`='$emai'"));
+		$cekemai=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from datapresensi where  TanggalPresensi='$tgl' and `emai`='$emai'"));
 		if ($cekemai==2) {
 		$response["success"] = 3;
 		$response["message"] = "gagal presensi";
@@ -72,7 +72,7 @@ if(!empty($username&&$emai)){
 		
 
 		}else{
-		$cekmasuk=mysql_num_rows(mysql_query("SELECT * from datapresensi where id_user='$username' and TanggalPresensi='$tgl' and Tipe='Keluar'"));
+		$cekmasuk=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from datapresensi where id_user='$username' and TanggalPresensi='$tgl' and Tipe='Keluar'"));
 		
 		if ($cekmasuk==1) {
 		$response["success"] = 4;
@@ -82,7 +82,7 @@ if(!empty($username&&$emai)){
 
 		
 		
-		mysql_query("INSERT INTO `datapresensi`( `id_user`, `Hari`, `TanggalPresensi`, `PresensiKeluar`, `TanggalBuat`, `Emai`, `Tipe`,`Foto`) VALUES ('$username','$hari','$tgl','$jam',NOW(),'$emai','Keluar','$namafoto')");
+		mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO `datapresensi`( `id_user`, `Hari`, `TanggalPresensi`, `PresensiKeluar`, `TanggalBuat`, `Emai`, `Tipe`,`Foto`) VALUES ('$username','$hari','$tgl','$jam',NOW(),'$emai','Keluar','$namafoto')");
 	
 		
 		$response["success"]      = 1;
