@@ -20,7 +20,13 @@
 
       if ($cekusername<1) {
          $password=md5($_POST[password]);
-      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO karyawan ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`,`tanggallahir`,`Ktp`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]','$_POST[tanggallahir]',NOW(),'$_POST[ktp]')");
+         $file = $_FILES["file"]["name"];
+         $tmp_name = $_FILES["file"]["tmp_name"];
+
+         move_uploaded_file($tmp_name,"assets/images/karyawan/".$file);
+
+      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO karyawan ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`,`tanggal`,`Ktp`)
+        values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]','$_POST[tanggallahir]',NOW(),'$_POST[ktp]')");
 
 
  echo "<script>window.alert('Penambahan User Berhasil !!!')
@@ -40,7 +46,10 @@
     }elseif (isset($_POST[simpanedit])) {
 
 
+      $file = $_FILES["file"]["name"];
+      $tmp_name = $_FILES["file"]["tmp_name"];
 
+      move_uploaded_file($tmp_name,"assets/images/karyawan/".$file);
 
 
      mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `karyawan` SET `nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]',`Ktp`='$_POST[ktp]', `tanggal`='$_POST[tanggallahir]',WHERE username='$_POST[username]'");
@@ -142,7 +151,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                     </div>
                     <div class="modal-body">
 
-                      <form method="post" action="">
+                      <form method="post" action="" enctype="multipart/form-data">
 
 
                           <div class="form-group">
@@ -176,6 +185,10 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                             <label class="form-label">Ktp</label>
                             <input type="text" class="form-control"  placeholder="Ktp" name="ktp" >
                           </div>
+                          <div class="form-group">
+                            <label class="form-label">Foto</label>
+                            <input type="file" name="file">
+                            </div>
 
 
 
@@ -223,7 +236,8 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
 
 
       case 'edit':
-      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM karyawan WHERE id='$_GET[id]'"));
+      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "select a.*,b.Level as NamaLevel,b.id as idlevel from user a
+left join user_level b on a.id_level=b.id  WHERE a.id='$_GET[id]'"));
 
 
 
@@ -239,14 +253,14 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
 
                                           <h2 class="mb-0">Edit</h2>
                                            <hr/>
-                      <form method="post" action="">
+                      <form method="post" action="" enctype="multipart/form-data">
                           <div class="form-group">
                             <label class="form-label">Nama</label>
                             <input type="text" class="form-control"  placeholder="Nama" name="nama" value="<?php echo $edit[nama]; ?>">
                           </div>
                           <div class="form-group">
                           <label class="form-label">Tanggal Lahir</label>
-                          <input type="date" id="tanggal" name="tanggal" class="form-control" value="<?php echo $edit[tanggallahir]; ?>">
+                          <input type="date" id="tanggal" name="tanggal" class="form-control">
                         </div>
                            <div class="form-group">
                             <label class="form-label">Username</label>
@@ -271,6 +285,10 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                           <label class="form-label">Ktp</label>
                           <input type="text" class="form-control"  placeholder="Ktp" name="ktp" value="<?php echo $edit[Ktp]; ?>">
                         </div>
+                        <div class="form-group">
+                          <label class="form-label">Foto</label>
+                          <input type="file" name="file" value="<?php echo $edit[foto]; ?>>
+                          </div>
 
 
 
