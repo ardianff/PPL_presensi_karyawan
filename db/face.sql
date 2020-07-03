@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2020 at 09:55 AM
+-- Generation Time: Jul 03, 2020 at 07:41 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -68,16 +68,17 @@ CREATE TABLE `karyawan` (
   `NA` varchar(5) NOT NULL DEFAULT '',
   `TanggalBuat` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `Ktp` varchar(45) NOT NULL,
-  `tanggallahir` date NOT NULL
+  `tanggallahir` date NOT NULL,
+  `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `phone`, `username`, `password`, `id_level`, `NA`, `TanggalBuat`, `Ktp`, `tanggallahir`) VALUES
-(7, 'Alif Ananda Wijapena Prayogi', 'Sawahan, Nganjuk, Jawa Timur', '082227250034', 'alif', 'f553aa35c5fac63fc6e1c81f3b45b58c', '2', '', '2020-06-15 17:43:04', '3374102302990001', '0000-00-00'),
-(8, 'Ardian Ferdy Firmansyah', 'Semarang', '082227250034', 'ardianff', '09cfbef35d33065e77443a5ff1e6e2d1', '2', '', '2020-06-15 17:54:22', '3374102302990001', '1999-02-23');
+INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `phone`, `username`, `password`, `id_level`, `NA`, `TanggalBuat`, `Ktp`, `tanggallahir`, `foto`) VALUES
+(7, 'Alif Ananda Wijapena Prayogi', 'Sawahan, Nganjuk, Jawa Timur', '082227250034', 'alif', 'f553aa35c5fac63fc6e1c81f3b45b58c', '2', '', '2020-06-15 17:43:04', '3374102302990001', '0000-00-00', ''),
+(8, 'Ardian Ferdy Firmansyah', 'Semarang', '082227250034', 'ardianff', '09cfbef35d33065e77443a5ff1e6e2d1', '2', '', '2020-06-15 17:54:22', '3374102302990001', '1999-02-23', '');
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,8 @@ INSERT INTO `lastlogin` (`id_lastlogin`, `id_user`, `TanggalBuat`) VALUES
 (38, '8', '2020-07-03 12:31:15'),
 (39, '1', '2020-07-03 12:36:06'),
 (40, '1', '2020-07-03 12:48:30'),
-(41, '1', '2020-07-03 13:34:18');
+(41, '1', '2020-07-03 13:34:18'),
+(42, '1', '2020-07-03 22:20:55');
 
 -- --------------------------------------------------------
 
@@ -299,7 +301,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT for table `lastlogin`
 --
 ALTER TABLE `lastlogin`
-  MODIFY `id_lastlogin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_lastlogin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `notifikasi`
