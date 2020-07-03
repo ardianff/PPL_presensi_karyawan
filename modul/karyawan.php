@@ -79,6 +79,7 @@ echo '<script type="text/javascript">
                               <th class="wd-20p">Nama</th>
                               <th class="wd-20p">No.phone</th>
                               <th class="wd-20p">Alamat</th>
+                              <th class="wd-20p">Tanggal Lahir</th>
                               <th class="wd-15p">Level</th>
 
                          <th class="wd-10p">Aksi</th>
@@ -102,6 +103,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                                 <td>$q[nama] </td>
                                 <td>$q[phone] </td>
                                 <td>$q[alamat] </td>
+                                <td>$q[tanggallahir] </td>
                                 <td>$q[NamaLevel] </td>
 
                                 <td>

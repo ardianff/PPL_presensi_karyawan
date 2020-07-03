@@ -101,7 +101,7 @@ $datapresensi=mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT *
                                                 <thead class="thead-light">
                                                     <tr>
                               <th class="wd-15p">No</th>
-                              <th class="wd-15p">Nama</th>
+                              <th class="wd-15p">Username</th>
                               <th class="wd-20p">Tanggal Login</th>
 
 
