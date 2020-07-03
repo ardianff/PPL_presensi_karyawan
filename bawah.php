@@ -1,5 +1,5 @@
   <!-- container -->
-            <footer class="footer text-center text-sm-left">&copy; 2020 Crovex <span class="text-muted d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes</span></footer>
+            <footer class="footer text-center text-sm-left">&copy; 2020 PPL Presensi <span class="text-muted d-none d-sm-inline-block float-right"></span></footer>
             <!--end footer-->
         </div>
         <!-- end page content -->
@@ -18,7 +18,7 @@
     <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="assets/plugins/jvectormap/jquery-jvectormap-us-aea-en.js"></script>
     <script src="assets/pages/jquery.analytics_dashboard.init.js"></script>
-    
+
 
 
     <script src="assets/js/jquery-ui.min.js"></script>
