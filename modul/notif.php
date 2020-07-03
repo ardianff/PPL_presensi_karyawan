@@ -136,7 +136,7 @@
                                                 <?php
                                                  
                      
-                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from member where id_level='2' ");
+                    $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from karyawan where id_level='2' ");
                       echo "<select class=\"form-control\" name=\"iduser\" >";
                       echo "<option > Pilih User  </option>";
                     while ($r = mysqli_fetch_array($sql)) {
