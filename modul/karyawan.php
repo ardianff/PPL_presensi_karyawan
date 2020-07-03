@@ -43,7 +43,7 @@
 
 
 
-     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `karyawan` SET `nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]',`Ktp`='$_POST[ktp]', `tanggal`='$_POST[tanggallahir]',WHERE username='$_POST[username]'");
+     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE `karyawan` SET `nama`='$_POST[nama]',`phone`='$_POST[phone]',`alamat`='$_POST[alamat]',`Ktp`='$_POST[ktp]', `tanggallahir`='$_POST[tanggallahir]' WHERE username='$_POST[username]'");
 echo '<script type="text/javascript">
            window.location = "media.php?module=karyawan"
       </script>';
@@ -151,7 +151,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                           </div>
                           <div class="form-group">
                           <label class="form-label">Tanggal Lahir</label>
-                          <input type="date" id="tanggal" name="tanggal" class="form-control ">
+                          <input type="date" id="tanggal" name="tanggallahir" class="form-control ">
                         </div>
                            <div class="form-group">
                             <label class="form-label">Username</label>
@@ -246,7 +246,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                           </div>
                           <div class="form-group">
                           <label class="form-label">Tanggal Lahir</label>
-                          <input type="date" id="tanggal" name="tanggal" class="form-control" value="<?php echo $edit[tanggallahir]; ?>">
+                          <input type="date" id="tanggal" name="tanggallahir" class="form-control" value="<?php echo $edit[tanggallahir]; ?>">
                         </div>
                            <div class="form-group">
                             <label class="form-label">Username</label>
@@ -266,11 +266,6 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                             <label class="form-label">Ktp</label>
                             <input type="text" class="form-control"  placeholder="Ktp" name="ktp" value="<?php echo $edit[Ktp]; ?>">
                           </div>
-
-                          <div class="form-group">
-                          <label class="form-label">Ktp</label>
-                          <input type="text" class="form-control"  placeholder="Ktp" name="ktp" value="<?php echo $edit[Ktp]; ?>">
-                        </div>
 
 
 
