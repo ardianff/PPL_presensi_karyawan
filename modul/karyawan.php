@@ -20,7 +20,7 @@
 
       if ($cekusername<1) {
          $password=md5($_POST[password]);
-      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO karyawan ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`,`tanggal`,`Ktp`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]','$_POST[tanggallahir]',NOW(),'$_POST[ktp]')");
+      mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO karyawan ( `username`, `password`, `nama`, `id_level`,`alamat`,`phone`,`TanggalBuat`,`tanggallahir`,`Ktp`) values ('$_POST[username]','$password','$_POST[nama]','$_POST[level]','$_POST[alamat]','$_POST[phone]','$_POST[tanggallahir]',NOW(),'$_POST[ktp]')");
 
 
  echo "<script>window.alert('Penambahan User Berhasil !!!')
@@ -223,8 +223,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
 
 
       case 'edit':
-      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "select a.*,b.Level as NamaLevel,b.id as idlevel from user a
-left join user_level b on a.id_level=b.id  WHERE a.id='$_GET[id]'"));
+      $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM karyawan WHERE id='$_GET[id]'"));
 
 
 
@@ -247,7 +246,7 @@ left join user_level b on a.id_level=b.id  WHERE a.id='$_GET[id]'"));
                           </div>
                           <div class="form-group">
                           <label class="form-label">Tanggal Lahir</label>
-                          <input type="date" id="tanggal" name="tanggal" class="form-control">
+                          <input type="date" id="tanggal" name="tanggal" class="form-control" value="<?php echo $edit[tanggallahir]; ?>">
                         </div>
                            <div class="form-group">
                             <label class="form-label">Username</label>

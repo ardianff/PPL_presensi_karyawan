@@ -45,7 +45,7 @@
                             mysqli_query($GLOBALS["___mysqli_ston"], "INSERT into lastlogin (id_user,TanggalBuat) values ('$sql[id]',NOW())");
 
                             $_SESSION['username'] = $sql['username'];
-                            $_SESSION['nama'] = $nama;
+                            $_SESSION['nama'] = $sql['nama'];
                             $_SESSION['password'] = $sql['password'];
                             $_SESSION['id'] = $sql['id'];
                             $_SESSION['level']=$sql['id_level'];

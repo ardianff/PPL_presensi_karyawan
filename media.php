@@ -10,7 +10,7 @@
   session_start();
 
       $username=$_SESSION['username'] ;
-      $nama = $_SESSION['username'];
+      $nama = $_SESSION['nama'];
       $p=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user where username='$username' and nama='$nama'"));
 
 
