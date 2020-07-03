@@ -18,6 +18,7 @@
     <script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="assets/plugins/jvectormap/jquery-jvectormap-us-aea-en.js"></script>
     <script src="assets/pages/jquery.analytics_dashboard.init.js"></script>
+    <script src="assets/js/bootstrap-datepicker.js"></script>
 
 
 
