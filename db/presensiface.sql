@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jul 2020 pada 09.27
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.2.26
+-- Host: localhost
+-- Generation Time: Jul 03, 2020 at 09:55 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `presensiface`
+-- Database: `face`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `datapresensi`
+-- Table structure for table `datapresensi`
 --
 
 CREATE TABLE `datapresensi` (
@@ -37,24 +36,25 @@ CREATE TABLE `datapresensi` (
   `PresensiKeluar` varchar(45) NOT NULL DEFAULT '',
   `TanggalBuat` date NOT NULL DEFAULT '0000-00-00',
   `Emai` varchar(255) NOT NULL,
-  `Tipe` varchar(45) NOT NULL,
-  `Foto` text NOT NULL
+  `Tipe` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `datapresensi`
+-- Dumping data for table `datapresensi`
 --
 
-INSERT INTO `datapresensi` (`id`, `id_user`, `Hari`, `TanggalPresensi`, `PresensiMasuk`, `PresensiKeluar`, `TanggalBuat`, `Emai`, `Tipe`, `Foto`) VALUES
-(1, 'lukman', 'Kamis', '2019-03-21', '10:23:15', '', '2019-03-21', '356578091791629', 'Masuk', 'user-8.jpg'),
-(2, 'lukman', 'Kamis', '2019-03-21', '', '10:23:15', '2019-03-21', '356578091791629', 'Keluar', 'user-8.jpg'),
-(4, 'lukman', 'Selasa', '2020-02-18', '14:08:29', '', '2020-02-18', '354465106043018', 'Masuk', 'user-10.jpg'),
-(5, 'lukman', 'Selasa', '2020-02-18', '', '14:09:00', '2020-02-18', '354465106043018', 'Keluar', 'user-10.jpg');
+INSERT INTO `datapresensi` (`id`, `id_user`, `Hari`, `TanggalPresensi`, `PresensiMasuk`, `PresensiKeluar`, `TanggalBuat`, `Emai`, `Tipe`) VALUES
+(1, 'lukman', 'Kamis', '2019-03-21', '10:23:15', '', '2019-03-21', '356578091791629', 'Masuk'),
+(2, 'lukman', 'Kamis', '2019-03-21', '', '10:23:15', '2019-03-21', '356578091791629', 'Keluar'),
+(4, 'lukman', 'Selasa', '2020-02-18', '14:08:29', '', '2020-02-18', '354465106043018', 'Masuk'),
+(5, 'lukman', 'Selasa', '2020-02-18', '', '14:09:00', '2020-02-18', '354465106043018', 'Keluar'),
+(6, 'ardianff', 'Jumat', '2020-07-03', '12:34:57', '', '2020-07-03', '868937035246283', 'Masuk'),
+(7, 'ardianff', 'Jumat', '2020-07-03', '', '12:41:01', '2020-07-03', '868937035246283', 'Keluar');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `karyawan`
+-- Table structure for table `karyawan`
 --
 
 CREATE TABLE `karyawan` (
@@ -67,23 +67,22 @@ CREATE TABLE `karyawan` (
   `id_level` varchar(5) NOT NULL DEFAULT '',
   `NA` varchar(5) NOT NULL DEFAULT '',
   `TanggalBuat` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `Foto` varchar(255) NOT NULL DEFAULT '',
   `Ktp` varchar(45) NOT NULL,
   `tanggallahir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `karyawan`
+-- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `phone`, `username`, `password`, `id_level`, `NA`, `TanggalBuat`, `Foto`, `Ktp`, `tanggallahir`) VALUES
-(34, 'Ardian', 'Semarang', '123', 'ardian', '5b3bb3e5458e02aa356f2fc671ae08d9', '2', '', '2020-07-16 00:00:00', 'pic_karyawan1593754500688.jpg', '123', '2020-07-07'),
-(41, 'Septian Muhammad Adii', 'Boyolaliii', '0822255221311', 'septian', '202cb962ac59075b964b07152d234b70', '2', '', '2020-07-05 14:16:02', 'user-5.png', '12344', '2020-06-06');
+INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `phone`, `username`, `password`, `id_level`, `NA`, `TanggalBuat`, `Ktp`, `tanggallahir`) VALUES
+(7, 'Alif Ananda Wijapena Prayogi', 'Sawahan, Nganjuk, Jawa Timur', '082227250034', 'alif', 'f553aa35c5fac63fc6e1c81f3b45b58c', '2', '', '2020-06-15 17:43:04', '3374102302990001', '0000-00-00'),
+(8, 'Ardian Ferdy Firmansyah', 'Semarang', '082227250034', 'ardianff', '09cfbef35d33065e77443a5ff1e6e2d1', '2', '', '2020-06-15 17:54:22', '3374102302990001', '1999-02-23');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `lastlogin`
+-- Table structure for table `lastlogin`
 --
 
 CREATE TABLE `lastlogin` (
@@ -93,7 +92,7 @@ CREATE TABLE `lastlogin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `lastlogin`
+-- Dumping data for table `lastlogin`
 --
 
 INSERT INTO `lastlogin` (`id_lastlogin`, `id_user`, `TanggalBuat`) VALUES
@@ -119,32 +118,30 @@ INSERT INTO `lastlogin` (`id_lastlogin`, `id_user`, `TanggalBuat`) VALUES
 (20, '5', '2020-02-18 12:12:09'),
 (21, '5', '2020-02-18 17:19:43'),
 (22, '1', '2020-02-18 17:45:01'),
-(23, '1', '2020-06-28 09:42:33'),
-(24, '6', '2020-06-28 09:44:26'),
-(25, '6', '2020-06-28 09:47:55'),
-(26, '1', '2020-06-28 09:48:11'),
-(27, '7', '2020-06-28 09:50:06'),
-(28, '6', '2020-06-28 09:54:43'),
-(29, '6', '2020-06-28 09:55:12'),
-(30, '6', '2020-07-03 13:44:10'),
-(31, '6', '2020-07-03 14:05:09'),
-(32, '6', '2020-07-03 14:22:54'),
-(33, '6', '2020-07-03 16:03:29'),
-(34, '6', '2020-07-03 20:34:45'),
-(35, '6', '2020-07-03 22:10:28'),
-(36, '6', '2020-07-03 22:33:20'),
-(37, '1', '2020-07-03 22:38:02'),
-(38, '6', '2020-07-03 22:49:26'),
-(39, '6', '2020-07-03 22:50:26'),
-(40, '6', '2020-07-04 00:54:29'),
-(41, '6', '2020-07-04 11:32:09'),
-(42, '6', '2020-07-04 12:09:46'),
-(43, '6', '2020-07-05 12:00:13');
+(23, '1', '2020-06-15 17:40:34'),
+(24, '1', '2020-06-15 17:54:47'),
+(25, '1', '2020-06-15 17:55:11'),
+(26, '1', '2020-06-15 18:06:04'),
+(27, '8', '2020-06-15 18:06:11'),
+(28, '1', '2020-06-15 18:09:04'),
+(29, '8', '2020-06-15 20:28:59'),
+(30, '1', '2020-06-26 19:45:58'),
+(31, '1', '2020-06-26 19:46:17'),
+(32, '8', '2020-06-26 19:48:02'),
+(33, '8', '2020-06-26 19:55:47'),
+(34, '8', '2020-06-26 20:00:38'),
+(35, '8', '2020-06-26 20:09:09'),
+(36, '1', '2020-06-26 21:12:50'),
+(37, '8', '2020-07-01 12:10:24'),
+(38, '8', '2020-07-03 12:31:15'),
+(39, '1', '2020-07-03 12:36:06'),
+(40, '1', '2020-07-03 12:48:30'),
+(41, '1', '2020-07-03 13:34:18');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `notifikasi`
+-- Table structure for table `notifikasi`
 --
 
 CREATE TABLE `notifikasi` (
@@ -157,16 +154,17 @@ CREATE TABLE `notifikasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `notifikasi`
+-- Dumping data for table `notifikasi`
 --
 
 INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `tanggal`, `iduser`, `NA`) VALUES
-(4, 'Test', 'Test Saja', '2020-07-05 14:24:03', '41', 'N');
+(1, 'Notifikasi ', 'Pengumuman,bahwasanya tanggal 21 oktober 2020 kita rekreasi bersama', '2019-12-26 11:23:59', '8', 'N'),
+(3, 'Pengumuman Terkait Pandemi Covid-19', 'Jadi kita libur 3 hari karena ada yg positif', '2019-12-26 11:25:15', '8', 'N');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `slider`
+-- Table structure for table `slider`
 --
 
 CREATE TABLE `slider` (
@@ -178,18 +176,19 @@ CREATE TABLE `slider` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `slider`
+-- Dumping data for table `slider`
 --
 
 INSERT INTO `slider` (`id_slider`, `Nama`, `Slider`, `TanggalBuat`, `Url`) VALUES
 (3, 'slide 1', 'slide1.jpg', '2019-08-13 07:23:23', ''),
 (4, 'slide 2', 'slide2.jpg', '2019-08-13 07:23:34', ''),
-(15, 'Test', 'pic_karyawan1593754500688.jpg', '2020-07-05 14:25:31', '');
+(5, 'slide 3', 'slide3.jpg', '2019-08-13 07:23:43', ''),
+(6, 'slide 4', 'slide4.jpg', '2019-08-13 07:23:52', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -206,19 +205,18 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `nama`, `alamat`, `phone`, `username`, `password`, `id_level`, `NA`, `TanggalBuat`, `Foto`) VALUES
-(1, 'Administratorr', 'Jemberr', '0851234567111', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', 'N', '2019-08-12 17:33:46', 'user-1.jpg'),
+(1, 'Administrator', 'Jemberrrr', '0851234567111', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', 'N', '2019-08-12 17:33:46', 'user-1.jpg'),
 (5, 'lukman', 'jember', '123', 'lukman', 'b5bbc8cf472072baffe920e4e28ee29c', '2', '', '2019-08-12 19:43:21', ''),
-(6, 'Septian Muhammad Adi', 'Boyolali', '082225522131', 'septian', '5b3bb3e5458e02aa356f2fc671ae08d9', '1', '', '2020-06-28 09:44:16', ''),
-(7, 'Alifffff', 'Pemalang', '082222222', 'alif', '099a147c0c6bcd34009896b2cc88633c', '1', '', '2020-06-28 09:49:44', '');
+(6, 'Septian Muhammad Adi', 'Boyolali', '00908089077', 'septian', 'eaec8de3a25ffaad45461d875060005f', '1', '', '2020-06-15 18:09:35', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_level`
+-- Table structure for table `user_level`
 --
 
 CREATE TABLE `user_level` (
@@ -228,7 +226,7 @@ CREATE TABLE `user_level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user_level`
+-- Dumping data for table `user_level`
 --
 
 INSERT INTO `user_level` (`id`, `level`, `NA`) VALUES
@@ -240,89 +238,89 @@ INSERT INTO `user_level` (`id`, `level`, `NA`) VALUES
 --
 
 --
--- Indeks untuk tabel `datapresensi`
+-- Indexes for table `datapresensi`
 --
 ALTER TABLE `datapresensi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `karyawan`
+-- Indexes for table `karyawan`
 --
 ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `lastlogin`
+-- Indexes for table `lastlogin`
 --
 ALTER TABLE `lastlogin`
   ADD PRIMARY KEY (`id_lastlogin`);
 
 --
--- Indeks untuk tabel `notifikasi`
+-- Indexes for table `notifikasi`
 --
 ALTER TABLE `notifikasi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `slider`
+-- Indexes for table `slider`
 --
 ALTER TABLE `slider`
   ADD PRIMARY KEY (`id_slider`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user_level`
+-- Indexes for table `user_level`
 --
 ALTER TABLE `user_level`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `datapresensi`
+-- AUTO_INCREMENT for table `datapresensi`
 --
 ALTER TABLE `datapresensi`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `karyawan`
+-- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `lastlogin`
+-- AUTO_INCREMENT for table `lastlogin`
 --
 ALTER TABLE `lastlogin`
-  MODIFY `id_lastlogin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_lastlogin` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT untuk tabel `notifikasi`
+-- AUTO_INCREMENT for table `notifikasi`
 --
 ALTER TABLE `notifikasi`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `slider`
+-- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id_slider` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_slider` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `user_level`
+-- AUTO_INCREMENT for table `user_level`
 --
 ALTER TABLE `user_level`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
