@@ -3,7 +3,7 @@ error_reporting(0);
 $server = "localhost";
 $username = "root";
 $password = "";
-$database = "face";
+$database = "presensiface";
 
 // Koneksi dan memilih database di server
 ($GLOBALS["___mysqli_ston"] = mysqli_connect($server, $username, $password)) or die("Koneksi gagal");
