@@ -2,9 +2,9 @@
     error_reporting(0);
     session_start();
   include  "config/koneksi.php";
- 
+
   if(!isset($_SESSION['username'])){
-  
+
     header('location:index.php');
   }
 
@@ -29,14 +29,14 @@
               }
               // Check if file already exists
               if (file_exists($target_file)) {
-                  
+
         echo "<script>window.alert('File sudah ada !!!')
         window.location='media.php?module=karyawan'</script>";
                   $uploadOk = 0;
               }
               // Check file size
               if ($_FILES["fileToUpload"]["size"] > 500000) {
-                 
+
  echo "<script>window.alert('File terlalu besar !!!')
         window.location='media.php?module=karyawan'</script>";
                   $uploadOk = 0;
@@ -47,14 +47,14 @@
 
                echo "<script>window.alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed. !!!')
                       window.location='media.php?module=karyawan'</script>";
-                 
+
                   $uploadOk = 0;
               }
               // Check if $uploadOk is set to 0 by an error
               if ($uploadOk == 0) {
                   echo "<script>window.alert('Sorry, your file was not uploaded. !!!')
                       window.location='media.php?module=karyawan'</script>";
-               
+
               // if everything is ok, try to upload file
               } else {
                   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -66,14 +66,14 @@
                       $password=md5($_POST[password]);
 
                       mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO `karyawan`(`nama`, `username`,`password`,`alamat`,`phone`,`id_level`,`tanggallahir`,`Ktp`,`Foto`,`TanggalBuat`) VALUES ('$_POST[nama]','$_POST[username]','$password','$_POST[alamat]','$_POST[phone]','$_POST[level]','$_POST[tanggallahir]','$_POST[ktp]','$brkas',NOW())");
-                      
+
                   } else {
                      echo "<script>window.alert('Sorry, there was an error uploading your file. !!!')
                       window.location='media.php?module=karyawan'</script>";
-                     
+
                   }
               }
-        
+
 
       }elseif ($_GET[delete]=="y") {
       mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM `karyawan` WHERE id='$_GET[id]'");
@@ -88,7 +88,7 @@
                       window.location='media.php?module=karyawan'</script>";
       }
 
-      
+
               $target_dir = "assets/karyawan/";
               $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
               $uploadOk = 1;
@@ -106,14 +106,14 @@
               }
               // Check if file already exists
               if (file_exists($target_file)) {
-                  
+
         echo "<script>window.alert('File sudah ada !!!')
         window.location='media.php?module=karyawan'</script>";
                   $uploadOk = 0;
               }
               // Check file size
               if ($_FILES["fileToUpload"]["size"] > 500000) {
-                 
+
  echo "<script>window.alert('File terlalu besar !!!')
         window.location='media.php?module=karyawan'</script>";
                   $uploadOk = 0;
@@ -124,14 +124,14 @@
 
                echo "<script>window.alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed. !!!')
                       window.location='media.php?module=karyawan'</script>";
-                 
+
                   $uploadOk = 0;
               }
               // Check if $uploadOk is set to 0 by an error
               if ($uploadOk == 0) {
                   echo "<script>window.alert('Sorry, your file was not uploaded. !!!')
                       window.location='media.php?module=karyawan'</script>";
-               
+
               // if everything is ok, try to upload file
               } else {
                   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -145,14 +145,14 @@
                   } else {
                      echo "<script>window.alert('Sorry, there was an error uploading your file. !!!')
                       window.location='media.php?module=karyawan'</script>";
-                     
+
                   }
               }
 
-       
 
-    
-     
+
+
+
     }
 
 
@@ -165,7 +165,7 @@
   <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-box card shadow">
-                                        
+
                                         <div class="card-body">
 
                                           <h2 class="mb-0">Data Karyawan</h2>
@@ -183,8 +183,8 @@
                               <th class="wd-15p">Nama</th>
                               <th class="wd-20p">Alamat</th>
                               <th class="wd-15p">Level</th>
-                             
-                              
+
+
                          <th class="wd-10p">Aksi</th>
                             </tr>
                           </thead>
@@ -198,7 +198,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                             $no;
                             while ($q=mysqli_fetch_array($query)) {
                               $no++;
-                             
+
 
                              echo "
                               <tr>
@@ -211,24 +211,24 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                                 <td>$q[nama]</td>
                                 <td>$q[alamat] </td>
                                 <td>$q[NamaLevel]</td>
-                                 
+
                                 ";
 
-                                  
-                                
+
+
                                 echo"<td><a href=\"media.php?module=karyawan&act=edit&id=$q[id]\" ><span class=\"badge badge-warning\">Edit</span></a> <a href=\"media.php?module=karyawan&delete=y&id=$q[id]\" ><span class=\"badge badge-danger\">Hapus</span></a>
                                  </td>
                               </tr>";
 
 
 
-                              
+
                             }
 
 
                             ?>
-                       
-                          
+
+
                           </tbody>
                         </table>
                 </div>
@@ -246,7 +246,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                     </div>
                     <div class="modal-body">
 
-                                      
+
                         <p id="gbr" align="center" ></p>
                       </div>
                       <div class="modal-footer">
@@ -286,7 +286,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
 
                           <div class="form-group">
                             <label class="form-label">Password</label>
-                            <input type="text" class="form-control"  placeholder="Password" name="password" required="">
+                            <input type="password" class="form-control"  placeholder="Password" name="password" required="">
                           </div>
 
                           <div class="form-group">
@@ -311,7 +311,7 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
 
                           <div class="form-group">
                             <label for="cc-number" class="control-label mb-1">Level</label>
-                            <?php 
+                            <?php
                             $sql = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from user_level where id='2'");
                             echo "<select class=\"form-control\" name=\"level\" >";
                             echo "<option > Pilih Level  </option>";
@@ -322,24 +322,24 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                               else {
                                 echo "<option value='$r[id]'>  $r[level] </option>";
                               }
-                            } 
+                            }
                             echo "</select>";
                             ?>
                           </div>
-                          
-                          
 
-                          
 
-                  
-                   
+
+
+
+
+
 
 
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                       <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
-                     
+
                     </div>
                   </div>
                 </div>
@@ -349,22 +349,22 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
 
        <?php
         break;
-      
+
 
 
          case 'edit':
       $edit=mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * from karyawan WHERE id='$_GET[id]'"));
 
-     
+
 
         ?>
 
-        
+
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card-box card shadow">
-                                        
+
                                         <div class="card-body">
 
                                           <h2 class="mb-0">Edit</h2>
@@ -434,8 +434,8 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
                             ?>
 
                           </div>
-                          
-                          
+
+
 
 
                     <button type="submit" name="simpanedit" class="mt-2 btn btn-block btn-success mt-1 mb-1">Simpan</button>
@@ -447,10 +447,10 @@ left join user_level b on a.id_level=b.id where a.id_level='2'");
         case 'detail':
           ?>
 
-         
+
           <?php
           break;
-    
+
     }
 
 ?>
