@@ -17,38 +17,40 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="20dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:src="@drawable/nointernet"
-                android:layout_gravity="center"
-                android:contentDescription="@string/wifi" />
-            <TextView
-                android:fontFamily="@font/poppins"
-                style="@style/homeHeading"
-                android:textColor="@color/blackTextColor"
+            <com.example.presensifacegeofencing.customfonts.GoMytext
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/headerTextSize"
-                android:text="@string/no_internet"
+                android:text="@string/sistem_presensi_karyawan"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp" />
             <TextView
-                android:gravity="center"
                 android:fontFamily="@font/poppins"
-                android:id="@+id/spinAndWinReward"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="normal"
+                android:textSize="10sp"
+                android:text="@string/universitas_dian_nuswantoro"/>
+            <TextView
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/poppins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                style="@style/learnhubTitleText"
                 android:textStyle="normal"
-                android:textSize="14sp"
-                android:text="@string/please_check_your_connection_status_and_try_again"/>
+                android:textSize="8sp"
+                android:text="@string/tekan_ok_untuk_melanjutkan_login"/>
             <Button
                 android:id="@+id/btnSpinAndWinRedeem"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:text="@string/close"
-                android:layout_marginTop="30dp"
+                android:text="@string/ok"
+                android:layout_marginTop="45dp"
                 android:textColor="@color/whiteTextColor"
                 android:background="@drawable/btnlogin"/>
         </LinearLayout>

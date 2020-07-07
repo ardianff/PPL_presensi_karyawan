@@ -213,8 +213,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="11sp"
                         android:textStyle="bold"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentEnd="true"/>
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout

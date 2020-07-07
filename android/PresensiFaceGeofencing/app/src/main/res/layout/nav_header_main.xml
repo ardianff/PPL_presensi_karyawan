@@ -10,13 +10,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_horizontal_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp">
-
             <LinearLayout
                 android:layout_gravity="center"
                 android:gravity="left"
@@ -25,25 +23,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp">
-
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/foto1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/check_in_icon" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:orientation="vertical">
-
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical">
-
                         <TextView
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
@@ -54,30 +48,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="left"
-                            android:text="Sistem Presensi Karyawan "
-                            android:textSize="12dp" />
-
+                            android:text="@string/sistem_presensi_karyawan"
+                            android:textSize="12sp" />
                         <TextView
-
                             android:layout_gravity="center"
                             android:fontFamily="@font/poppins"
                             android:textColor="#fff"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="left"
-                            android:text="Menggunakan Metode Geofencing Berbasis Android"
-                            android:textSize="8dp" />
-
+                            android:text="@string/menggunakan_metode_geofencing_berbasis_android"
+                            android:textSize="8sp" />
                     </LinearLayout>
-
-
                 </LinearLayout>
-
-
             </LinearLayout>
-
-
         </LinearLayout>
-
-
 </LinearLayout>
