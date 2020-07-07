@@ -54,12 +54,8 @@ public class GeofenceTransitionService extends IntentService {
         // Check if the transition type is of interest
         if ( geoFenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
                 geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT ) {
-            // Get the geofence that were triggered
             List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
-
             String geofenceTransitionDetails = getGeofenceTransitionDetails(geoFenceTransition, triggeringGeofences );
-
-            // Send notification details as a String
             sendNotification( geofenceTransitionDetails );
         }
     }
@@ -71,7 +67,6 @@ public class GeofenceTransitionService extends IntentService {
         for ( Geofence geofence : triggeringGeofences ) {
             triggeringGeofencesList.add( geofence.getRequestId() );
         }
-
         String status = null;
         if ( geoFenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER )
             status = "Entering ";
@@ -99,26 +94,19 @@ public class GeofenceTransitionService extends IntentService {
         stackBuilder.addParentStack(Home.class);
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-
-        // Creating and sending Notification
+        //mengirim notifikasi
         NotificationManager notificatioMng =
                 (NotificationManager) getSystemService( Context.NOTIFICATION_SERVICE );
+        assert notificatioMng != null;
         notificatioMng.notify(
                 GEOFENCE_NOTIFICATION_ID,
                 createNotification(msg, resultPendingIntent));
-
     }
 
-    // Create notification
+    // membuat notifikasi
     private Notification createNotification(String msg, PendingIntent notificationPendingIntent) {
-
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
             mChannel.setDescription(Description);
@@ -127,16 +115,10 @@ public class GeofenceTransitionService extends IntentService {
             mChannel.enableVibration(true);
             mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
             mChannel.setShowBadge(true);
-
             if (notificationManager != null) {
-
                 notificationManager.createNotificationChannel(mChannel);
             }
-
         }
-
-
-
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Jangan Lupa Presensi")
@@ -151,17 +133,11 @@ public class GeofenceTransitionService extends IntentService {
 //                .addAction(R.drawable.ic_launcher_foreground, "Call", notificationPendingIntent)
 //                .addAction(R.drawable.ic_launcher_foreground, "More", notificationPendingIntent)
 //                .addAction(R.drawable.ic_launcher_foreground, "And more", notificationPendingIntent);
-
-
 //        if (notificationManager != null) {
 //
 //            notificationManager.notify(NOTIFICATION_ID, builder.build());
 //        }
-
         return builder.build();
-
-
-
 //
 //
 //        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
@@ -174,18 +150,6 @@ public class GeofenceTransitionService extends IntentService {
 //                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
 //                .setAutoCancel(true);
 //        return notificationBuilder.build();
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HistoriPresensi extends AppCompatActivity {
     RecyclerView mRecyclerview;
@@ -38,10 +40,7 @@ public class HistoriPresensi extends AppCompatActivity {
     List<ModelData> mItems;
     ProgressDialog pd;
     RecyclerView.LayoutManager mManager;
-
-
     SharedPreferences iduser;
-
     String ambiliduser;
     TextView textnotif;
     EditText pencarian;
@@ -50,13 +49,13 @@ public class HistoriPresensi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tampil_histori);
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        toolbar= findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.getContext().setTheme(R.style.AppThemebaru);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        textnotif=(TextView)findViewById(R.id.kosong) ;
-        mRecyclerview = (RecyclerView) findViewById(R.id.recyclerviewTemp);
+        textnotif= findViewById(R.id.kosong);
+        mRecyclerview = findViewById(R.id.recyclerviewTemp);
         pd = new ProgressDialog(HistoriPresensi.this);
         mItems = new ArrayList<>();
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -69,15 +68,8 @@ public class HistoriPresensi extends AppCompatActivity {
                         Context.MODE_PRIVATE | Context.MODE_PRIVATE);
         ambiliduser = (iduser.getString(
                 Login.KEY_SATU, "NA"));
-
-
-
-
         MengambilData();
-
-
-        pencarian=(EditText) findViewById(R.id.pencarian);
-
+        pencarian= findViewById(R.id.pencarian);
         pencarian.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -89,22 +81,17 @@ public class HistoriPresensi extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
-
     private void MengambilData() {
         pd.setMessage("Fetching data...");
         pd.setCancelable(true);
         pd.show();
-
         JsonArrayRequest reqData = new JsonArrayRequest(Request.Method.GET,
                 Server.URL + "web_service/historipresensi.php?username=" + ambiliduser
                 , null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject data = response.getJSONObject(i);
@@ -113,23 +100,16 @@ public class HistoriPresensi extends AppCompatActivity {
                                 md.setJam(data.getString("jam"));
                                 md.setTipe(data.getString("tipe"));
 
-                                if (data.getString("message")=="kosong"|| data.getString("message").equals("kosong")){
+                                if (data.getString("message").equals("kosong") || data.getString("message").equals("kosong")){
                                     textnotif.setVisibility(View.VISIBLE);
-
                                 }else {
                                     textnotif.setVisibility(View.GONE);
-
                                 }
-
                                 mItems.add(md);
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
-
                             }
                         }
-
                         mAdapter.notifyDataSetChanged();
                         pd.cancel();
                     }
@@ -138,27 +118,21 @@ public class HistoriPresensi extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         pd.cancel();
-//                        Toast.makeText(getApplication(), "Ada Kesalahan Mohon Periksa Kembali", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplication(), "Tidak ada Histori Presensi", Toast.LENGTH_LONG).show();
                     }
                 });
-
         AppControler.getInstance().addToRequestQueue(reqData);
     }
-
-
-
     private void MengambilDataCari() {
         pd.setMessage("Fetching data...");
         pd.setCancelable(true);
         pd.show();
-
         JsonArrayRequest reqData = new JsonArrayRequest(Request.Method.GET,
                 Server.URL + "web_service/historipresensi.php?username=" + ambiliduser+"&cari="+pencarian.getText().toString()
                 , null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject data = response.getJSONObject(i);
@@ -166,24 +140,16 @@ public class HistoriPresensi extends AppCompatActivity {
                                 md.setTgl(data.getString("tanggal"));
                                 md.setJam(data.getString("jam"));
                                 md.setTipe(data.getString("tipe"));
-
-                                if (data.getString("message")=="kosong"|| data.getString("message").equals("kosong")){
+                                if (data.getString("message").equals("kosong") || data.getString("message").equals("kosong")){
                                     textnotif.setVisibility(View.VISIBLE);
-
                                 }else {
                                     textnotif.setVisibility(View.GONE);
-
                                 }
-
                                 mItems.add(md);
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
-
                             }
                         }
-
                         mAdapter.notifyDataSetChanged();
                         pd.cancel();
                     }
@@ -192,12 +158,10 @@ public class HistoriPresensi extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         pd.cancel();
-//                        Toast.makeText(getApplication(), "Ada Kesalahan Mohon Periksa Kembali", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplication(), "Histori Yang dicari tidak ada", Toast.LENGTH_LONG).show();
                     }
                 });
-
         AppControler.getInstance().addToRequestQueue(reqData);
     }
-
 }
 

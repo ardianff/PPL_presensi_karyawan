@@ -49,6 +49,7 @@ import com.example.presensifacegeofencing.historipresensi.Masuk;
 import com.example.presensifacegeofencing.notif.Notif;
 import com.example.presensifacegeofencing.presensi.Presensi;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,24 +72,18 @@ import static co.mobiwise.materialintro.shape.Focus.MINIMUM;
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MaterialIntroListener {
     ImageView menubar;
     CircleImageView foto;
-    TextView nama;
-    TextView alamat;
-    TextView tgl;
-    TextView prodi, semester,tempat_lahir;
+    TextView nama,alamat,tgl,no_hp,prodi, semester,tempat_lahir;
     String ambilusername, ambilpwd;
     private SharedPreferences prefssatu, prefpassword;
     private String mTitle = "Home";
     private DrawerLayout drawer;
-
     Spinner spinner;
     SeekBar intervalSeekBar;
     private BannerSlider bannerSlider;
     SeekBar indicatorSizeSeekBar;
     SwitchCompat loopSlidesSwitch, mustAnimateIndicators;
     SwitchCompat hideIndicatorsSwitch;
-
     ProgressBar p1, p2, p3, p4;
-
     LinearLayout tentang,histori,presensi,wa;
     ImageView notifikasi;
     boolean doubleBackToExitPressedOnce = false;
@@ -114,29 +109,22 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
-
-
-        // CALL getInternetStatus() function to check for internet and display error dialog
         if (new InternetDialog(this).getInternetStatus()) {
 //            Toast.makeText(this, "INTERNET VALIDATION PASSED", Toast.LENGTH_SHORT).show();
         }
-
-        up = (ImageView) findViewById(R.id.up);
-        menubar = (ImageView) findViewById(R.id.menubar);
-        nama = (TextView) findViewById(R.id.nama);
-        tempat_lahir = (TextView) findViewById(R.id.tempat_lahir);
-        tgl = (TextView) findViewById(R.id.tanggal_lahir);
-        alamat = (TextView) findViewById(R.id.alamat);
-
-
-        head = (LinearLayout) findViewById(R.id.head);
-
-        presensi = (LinearLayout) findViewById(R.id.presensi);
-        histori = (LinearLayout) findViewById(R.id.histori);
-        tentang = (LinearLayout) findViewById(R.id.tentang);
-        wa = (LinearLayout) findViewById(R.id.wa);
-
-
+        up = findViewById(R.id.up);
+        menubar = findViewById(R.id.menubar);
+        nama = findViewById(R.id.nama);
+        tempat_lahir = findViewById(R.id.tempat_lahir);
+        tgl = findViewById(R.id.tanggal_lahir);
+        no_hp=findViewById(R.id.no_hp);
+        alamat = findViewById(R.id.alamat);
+        head = findViewById(R.id.head);
+        foto = findViewById(R.id.foto);
+        presensi = findViewById(R.id.presensi);
+        histori = findViewById(R.id.histori);
+        tentang = findViewById(R.id.tentang);
+        wa = findViewById(R.id.wa);
         drawer = findViewById(R.id.drawer_layout);
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -146,7 +134,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 drawer.openDrawer(GravityCompat.START);
             }
         });
-
         prefssatu = this.getSharedPreferences(
                 Login.SATU,
                 Context.MODE_PRIVATE +
@@ -157,29 +144,24 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 Login.PASSOWRD,
                 Context.MODE_PRIVATE +
                         Context.MODE_PRIVATE | Context.MODE_PRIVATE);
-
-
         ambilpwd = (prefpassword.getString(
                 Login.KEY_PASSWORD, "NA"));
 
 
-        p1 = (ProgressBar) findViewById(R.id.p1);
+        p1 = findViewById(R.id.p1);
 //        p2 = (ProgressBar) findViewById(R.id.p2);
-        bannerSlider = (BannerSlider) findViewById(R.id.banner_slider1);
-        intervalSeekBar = (SeekBar) findViewById(R.id.seekbar_interval);
-        spinner = (Spinner) findViewById(R.id.spinner_page_indicator);
-        indicatorSizeSeekBar = (SeekBar) findViewById(R.id.seekbar_indicator_size);
+        bannerSlider = findViewById(R.id.banner_slider1);
+        intervalSeekBar = findViewById(R.id.seekbar_interval);
+        spinner = findViewById(R.id.spinner_page_indicator);
+        indicatorSizeSeekBar = findViewById(R.id.seekbar_indicator_size);
         indicatorSizeSeekBar.setMax(getResources().getDimensionPixelSize(R.dimen.max_slider_indicator_size));
-        loopSlidesSwitch = (SwitchCompat) findViewById(R.id.checkbox_loop_slides);
-        mustAnimateIndicators = (SwitchCompat) findViewById(R.id.checkbox_animate_indicators);
-        hideIndicatorsSwitch = (SwitchCompat) findViewById(R.id.checkbox_hide_indicators);
-        notifikasi = (ImageView) findViewById(R.id.notifikasi);
-
-
+        loopSlidesSwitch = findViewById(R.id.checkbox_loop_slides);
+        mustAnimateIndicators = findViewById(R.id.checkbox_animate_indicators);
+        hideIndicatorsSwitch = findViewById(R.id.checkbox_hide_indicators);
+        notifikasi = findViewById(R.id.notifikasi);
         setupViews();
         Slider();
         CekUser();
-
 
         presensi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,7 +186,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 startActivity(intent);
             }
         });
-
         notifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -214,10 +195,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
 
         showIntro(menubar, INTRO_FOCUS_1, "Gunakan menu sidebar ini, untuk mengakses modul-modul yang lain", Focus.NORMAL);
-
-
     }
-
     public void showIntro(View view, String id, String text, Focus focusType) {
         new MaterialIntroView.Builder(this)
                 .setTextColor(R.color.colorText)
@@ -234,18 +212,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 .setUsageId(id) //THIS SHOULD BE UNIQUE ID
                 .show();
     }
-
     @Override
     public void onUserClicked(String materialIntroViewId) {
-        if (materialIntroViewId == INTRO_FOCUS_1)
-            showIntro(notifikasi, INTRO_FOCUS_2, "Tekan tombol lonceng untuk melihat notifikasi ", MINIMUM);
-        else if (materialIntroViewId == INTRO_FOCUS_2)
-            showIntro(wa, INTRO_FOCUS_3, "Whatsapp Pemilik Lapangan", Focus.NORMAL);
-
-        else if (materialIntroViewId == INTRO_FOCUS_3)
-            showIntro(head, INTRO_FOCUS_4, "Profil User", Focus.ALL);
+        switch (materialIntroViewId) {
+            case INTRO_FOCUS_1:
+                showIntro(notifikasi, INTRO_FOCUS_2, "Tekan tombol lonceng untuk melihat notifikasi ", MINIMUM);
+                break;
+            case INTRO_FOCUS_2:
+                showIntro(wa, INTRO_FOCUS_3, "Kantor", Focus.NORMAL);
+                break;
+            case INTRO_FOCUS_3:
+                showIntro(head, INTRO_FOCUS_4, "Profil User", Focus.ALL);
+                break;
+        }
     }
-
     private void setupViews() {
 //        setupToolbar();
         setupBannerSlider();
@@ -253,9 +233,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setupSettingsUi();
 //        addBanners();
     }
-
     private void setupSettingsUi() {
-
         intervalSeekBar.setMax(500);
         intervalSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -264,19 +242,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     bannerSlider.setInterval(i);
                 }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
-
-
         indicatorSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -284,15 +256,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     bannerSlider.setIndicatorSize(i);
                 }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
@@ -322,19 +291,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
     }
-
-
     private void setupBannerSlider() {
-
         bannerSlider.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void onClick(int position) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlslide)));
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlslide)));
 //                Toast.makeText(Home.this, "Banner with position " + String.valueOf(position) + " clicked!", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 //
 //    private void addBanners(){
 //        //Add banners using image urls
@@ -369,65 +334,41 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         System.out.println(response);
                         if (response == null || response.equals("[]") || response.equals(null) || response.equals("")
                                 || response.toString().equals("") || response.toString().equals("[]")) {
-
-
                         } else {
                             for (int i = 0; i < response.length(); i++) {
                                 try {
-
-
                                     JSONObject data = response.getJSONObject(i);
-
 //                                    bannerSlider.addBanner(new RemoteBanner(Server.URL + "assets/slider/" + data.getString("Slider")
-//
 //                                    ));
-
 //                                    System.out.println(data.getString("image"));
-
-
                                     bannerSlider.addBanner(new RemoteBanner(Server.URL +"assets/slider/"+data.getString("image")
                                     ));
 //                                    urlslide = data.getString("url");
 
-
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-
                                 }
-
                             }
-
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 //                        pd.cancel();
-
                         p1.setVisibility(View.GONE);
                         Log.d("volley", "error : " + error.getMessage());
                     }
                 });
-
         AppControler.getInstance().addToRequestQueue(reqData);
-
-
     }
-
     private void setupPageIndicatorChooser() {
-
         String[] pageIndicatorsLabels = getResources().getStringArray(R.array.page_indicators);
-
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 pageIndicatorsLabels
         );
-
         spinner.setAdapter(arrayAdapter);
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -454,12 +395,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -470,21 +408,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.logOut:
-//                keluar();
-                return true;
-
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (id == R.id.logOut) {
+            //                keluar();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.nav_home) {
            Intent intent = new Intent(getApplicationContext(), Home.class);
            startActivity(intent);
@@ -493,8 +425,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             Intent intent = new Intent(getApplicationContext(), Keluar.class);
             startActivity(intent);
         }
-
         if (id == R.id.masuk) {
+
             Intent intent = new Intent(getApplicationContext(), Masuk.class);
             startActivity(intent);
         }
@@ -514,7 +446,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     public void keluar() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setMessage("Anda yakin ingin keluar?")
@@ -538,22 +469,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }).show();
     }
 
-
-    void About() {
-        final Dialog dialog1 = new Dialog(Home.this, R.style.df_dialog);
-        dialog1.setContentView(R.layout.about);
-        dialog1.setCancelable(true);
-        dialog1.setCanceledOnTouchOutside(true);
-        dialog1.findViewById(R.id.btnSpinAndWinRedeem).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog1.dismiss();
-            }
-        });
-        dialog1.show();
-    }
-
-
     void Maintenance() {
         final Dialog dialog1 = new Dialog(Home.this, R.style.df_dialog);
         dialog1.setContentView(R.layout.under);
@@ -568,10 +483,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
         dialog1.show();
     }
-
-
-
-
     void Berhasil() {
         final Dialog dialog1 = new Dialog(Home.this, R.style.df_dialog);
         dialog1.setContentView(R.layout.berhasil);
@@ -585,8 +496,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
         dialog1.show();
     }
-
-
     void Down() {
         final Dialog dialog1 = new Dialog(Home.this, R.style.df_dialog);
         dialog1.setContentView(R.layout.down);
@@ -601,8 +510,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
         dialog1.show();
     }
-
-
     private void CekUser() {
         JsonArrayRequest reqData = new JsonArrayRequest(Request.Method.POST, Server.URL + "web_service/detailuser.php?username=" + ambilusername, null,
                 new Response.Listener<JSONArray>() {
@@ -615,35 +522,26 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                 nama.setText(data.getString("nama"));
                                 tempat_lahir.setText(data.getString("tanggallahir"));
                                 alamat.setText(data.getString("alamat"));
-//                                prodi.setText(data.getString("prodi"));
-//                                semester.setText(data.getString("semester"));
-
-//                                if (data.getString("foto") == "null" || data.getString("prodi").equals("null") || data.getString("prodi") == "" || data.getString("prodi").equals("")) {
-//                                    foto.setImageDrawable(getResources().getDrawable(R.drawable.profile01));
-//                                } else {
-//                                    Picasso.with(getApplicationContext())
-//                                            .load(Server.URL + data.getString("foto"))
-//                                            .resize(300, 300)
-//                                            .into(foto);
-//
-//
-//                                }
-
-                                if (data.getString("under") == "Y" || data.getString("under").equals("Y")) {
-                                    Maintenance();
+                                no_hp.setText(data.getString("phone"));
+                                if (data.getString("foto").equals("null")
+                                        || data.getString("nama").equals("null")
+                                        || data.getString("tanggallahir").equals("null")
+                                        || data.getString("alamat").equals("null")
+                                        || data.getString("phone").equals("null")) {
+                                    foto.setImageDrawable(getResources().getDrawable(R.drawable.profile));
                                 } else {
-
+                                    Picasso.with(getApplicationContext())
+                                            .load(Server.URL+data.getString("foto"))
+                                            .resize(200,250)
+                                            .into(foto);
                                 }
-
-
+                                if (data.getString("under").equals("Y") || data.getString("under").equals("Y")) {
+                                    Maintenance();
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-
                             }
-
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {

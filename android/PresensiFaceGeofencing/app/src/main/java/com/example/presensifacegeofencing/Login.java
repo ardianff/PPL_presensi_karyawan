@@ -1,6 +1,7 @@
 package com.example.presensifacegeofencing;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -41,7 +42,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class Login extends AppCompatActivity {
 
@@ -129,14 +129,11 @@ public class Login extends AppCompatActivity {
         loginPrefsEditor = loginPreferences.edit();
 
         saveLogin = loginPreferences.getBoolean("saveLogin", false);
-        if (saveLogin == true) {
+        if (saveLogin) {
             username1.setText(loginPreferences.getString("username", ""));
             password1.setText(loginPreferences.getString("password", ""));
             saveLoginCheckBox.setChecked(true);
         }
-
-
-
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +144,7 @@ public class Login extends AppCompatActivity {
                 SharedPreferences.Editor worldReadWriteEdit = prefssatu.edit();
                 worldReadWriteEdit.putString(Login.KEY_SATU, username1.getText()
                         .toString());
-                worldReadWriteEdit.commit();
+                worldReadWriteEdit.apply();
 
 
                 prefpassword = getSharedPreferences(Login.PASSOWRD,
@@ -156,7 +153,7 @@ public class Login extends AppCompatActivity {
                 SharedPreferences.Editor worldReadWriteEdit1 = prefpassword.edit();
                 worldReadWriteEdit1.putString(Login.KEY_PASSWORD, password1.getText()
                         .toString());
-                worldReadWriteEdit1.commit();
+                worldReadWriteEdit1.apply();
 
                 if (username1.length() < 1) {
                     Toast.makeText(getApplicationContext(), "Masukkan Username dengan benar", Toast.LENGTH_SHORT).show();
@@ -169,6 +166,7 @@ public class Login extends AppCompatActivity {
                 }
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                assert imm != null;
                 imm.hideSoftInputFromWindow(username1.getWindowToken(), 0);
 
                 username = username1.getText().toString();
@@ -178,7 +176,7 @@ public class Login extends AppCompatActivity {
                     loginPrefsEditor.putBoolean("saveLogin", true);
                     loginPrefsEditor.putString("username", username);
                     loginPrefsEditor.putString("password", password);
-                    loginPrefsEditor.commit();
+                    loginPrefsEditor.apply();
                 } else {
                     loginPrefsEditor.clear();
                     loginPrefsEditor.commit();
@@ -194,6 +192,7 @@ public class Login extends AppCompatActivity {
 
 
         password1.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_LEFT = 0;
@@ -222,18 +221,12 @@ public class Login extends AppCompatActivity {
     }
 
     private void cekPassword(boolean pass) {
-        if (pass == true) {
+        if (pass) {
             password1.setTransformationMethod(PasswordTransformationMethod.getInstance());
         } else {
             password1.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
         }
     }
-
-
-
-
-
-
     void Ok(){
         final Dialog dialog1 = new Dialog(Login.this, R.style.df_dialog);
         dialog1.setContentView(R.layout.info);
@@ -248,12 +241,6 @@ public class Login extends AppCompatActivity {
         });
         dialog1.show();
     }
-
-
-
-
-
-
     private void Login() {
 
         final ProgressDialog loading = ProgressDialog.show(this, "Signin...", " Mohon Tunggu...", false, false);
@@ -261,12 +248,9 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try {
                             JSONObject jObj = new JSONObject(response);
                             success = jObj.getInt(TAG_SUCCESS);
-
-
                             if (success == 1) {
 
                                 prefManager.setFirstTimeLaunch(false);

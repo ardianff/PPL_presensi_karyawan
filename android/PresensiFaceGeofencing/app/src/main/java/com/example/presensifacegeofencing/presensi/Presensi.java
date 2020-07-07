@@ -62,6 +62,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -73,9 +74,6 @@ public class Presensi extends AppCompatActivity implements
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener,
         ResultCallback<Status> {
-
-
-//
 //    private static final String TAG = MainActivity.class.getSimpleName();
 
     private GoogleMap map;
@@ -113,7 +111,7 @@ public class Presensi extends AppCompatActivity implements
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.getContext().setTheme(R.style.AppThemebaru);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
@@ -180,8 +178,6 @@ public class Presensi extends AppCompatActivity implements
                 getJarak();
             }
         });
-
-
         username = getSharedPreferences(
                 Login.SATU,
                 Context.MODE_PRIVATE +
@@ -553,7 +549,7 @@ public class Presensi extends AppCompatActivity implements
 //            double lon = Double.longBitsToDouble( sharedPref.getLong( KEY_GEOFENCE_LON, -1 ));
 
 
-        //defaultnya lokasi apotek
+
         LatLng latLng = new LatLng(lat2, long2);
         markerForGeofence(latLng);
         drawGeofence();
@@ -620,16 +616,8 @@ public class Presensi extends AppCompatActivity implements
         if (jarak == 200 || jarak < 200) {
             if (cek == 1) {
                 startActivity(new Intent(Presensi.this,PresMasuk.class));
-
-//                Masuk();
-
-
             } else {
                 startActivity(new Intent(Presensi.this,PresKeluar.class));
-
-//                Keluar();
-
-
             }
         } else {
             gagal();
@@ -648,7 +636,7 @@ public class Presensi extends AppCompatActivity implements
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Informasi")
                 .setCancelText("Cancel")
-                .setContentText("Presensi Gagal, Karena anda berada diluar kantor!!!")
+                .setContentText("Presensi Gagal, Satu Handphone Hanya Digunakan Satu User / Anda Di Luar Kantor")
                 .setConfirmText("Oke")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
@@ -681,7 +669,7 @@ public class Presensi extends AppCompatActivity implements
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Informasi")
                 .setCancelText("Cancel")
-                .setContentText("Hari anda sudah presensi... !!!")
+                .setContentText("Hari Ini Anda Sudah Presensi... !!!")
                 .setConfirmText("Oke")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
@@ -697,7 +685,7 @@ public class Presensi extends AppCompatActivity implements
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Informasi")
                 .setCancelText("Cancel")
-                .setContentText("1 Hanphone, hanya digunakan 1 User !!!")
+                .setContentText("1 HP hanya digunakan 1 User !!!")
                 .setConfirmText("Oke")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
@@ -768,12 +756,9 @@ public class Presensi extends AppCompatActivity implements
             protected Map<String, String> getParams() {
                 //membuat parameters
                 Map<String, String> params = new HashMap<String, String>();
-
-
                 params.put("username", ambilusername);
                 params.put("emai", IMEI_Number_Holder);
                 params.put("jam", today.format("%k:%M:%S"));
-
                 return params;
             }
         };

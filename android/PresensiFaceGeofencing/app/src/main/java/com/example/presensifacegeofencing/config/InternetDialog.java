@@ -10,7 +10,6 @@ import com.example.presensifacegeofencing.R;
 
 public class InternetDialog {
     private Context context;
-
     public InternetDialog(){
 
     }
@@ -34,12 +33,12 @@ public class InternetDialog {
     public  boolean getInternetStatus() {
 
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
 
         if(!isConnected) {
-            //show no internet dialog
             showNoInternetDialog();
         }
         return isConnected;
