@@ -1,0 +1,58 @@
+Aplikasi Presensi Karyawan
+https://github.com/ardianff/PPL_presensi_karyawan/
+
+Anggota Kelompok
+Septian Muhammad Adi		A11.2017.10346
+Alif Ananda Wijapena P		A11.2017.10351
+Nafik Akhsana Fajar		A11.2017.10359
+Ardian Ferdy Firmansyah	A11.2017.10363
+Andin Fairuz Khosyi		A11.2017.10370
+Lestari Khoirunnisa		A11.2017.10415
+
+Deskripsi
+Aplikasi sistem presensi karyawan yang menggunakan metode geofencing yang memastikan bahwa karyawan hanya dapat bisa absen di range area wilayah kantornya saja apabila diluar kantor tidak akan bisa absen. 
+
+
+
+Kenapa Perlu Beralih Menggunakan Smartphone?
+Karena banyaknya pengguna smartphone dan juga perkembangan teknologi yang sudah maju, sudah saatnya beralih menggunakan sistem presensi yang lebih canggih yaitu menggunakan metode geofencing untuk mengurangi kecurangan presensi karyawan. Dan kami membuat ini untuk menghasilkan sistem presensi yang murah dan dapat digunakan oleh berbagai perusahaan.
+
+Geofencing
+Geofencing adalah penggunaan jaringan satelit GPS atau pengidentifikasi frekuensi radio lokal (seperti node Wi-Fi atau Bluetooth) untuk membuat batas-batas virtual di sekitar lokasi.
+
+
+
+
+DEMO APLIKASI 
+
+Aplikasi Presensi Karyawan
+
+Halaman Login
+
+Dashboard
+
+Petunjuk Penggunaan 
+Profile User 
+
+Petunjuk Penggunaan 
+Menu Sidebar
+
+Petunjuk Penggunaan 
+Notifikasi
+
+Petunjuk Penggunaan 
+Kantor
+
+Isi Menu Sidebar
+
+Notifikasi
+
+Presensi
+
+Presensi Masuk & Keluar
+
+Pop Up Peringatan Presensi
+
+Histori Presensi
+
+Tentang E-Karyawan
