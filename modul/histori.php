@@ -62,7 +62,7 @@
                                 <th class="wd-15p">Presensi Keluar </th>
                                  <th class="wd-15p">Tanggal Presensi </th>
 
-                                   <th class="wd-15p">Tipe </th>
+                                   
 
                             </tr>
                           </thead>
@@ -96,7 +96,7 @@
                                echo" <td><span class=\"badge badge-success\">$pre </span></td>
                                 <td><span class=\"badge badge-success\">$kel </span></td>
                                 <td>$q[TanggalPresensi] </td>
-                                 <td>$q[Tipe] </td>";
+                                 ";
                                   ?>
 
                                 
